@@ -1,0 +1,17 @@
+﻿Common.Sadistic=Sadistisch
+Common.Blessed=Gesegnet
+Common.Cursed=Verflucht
+Common.SniperBullet=Scharfschützenkugel
+Common.RangedDamageIncrease=erhöhter Fernkampfschaden
+Common.BlueGelArrow=Blauer Gelpfeil
+Common.PinkGelArrow=Rosa Gelpfeil
+Common.HoneyHeart=Honigherz
+Common.Crown=Krone
+Common.BlueGelCrown=Blaue Gelkrone
+Common.PinkGelCrown=Rosa Gelkrone
+
+ItemTooltip.BlueGelArrow=Gibt Pfeilen eine kleine Chance einen klebrigen Pfeil abzuschießen
+ItemTooltip.PinkGelArrow=Gibt Pfeilen eine kleine Chance einen Hüpfpfeil abzuschießen
+
+ItemTooltip.PinkGelCrown=Lässt deine Beschwörungen selten Leben stehlen
+ItemTooltip.BlueGelCrown=Lässt deine Beschwörungen selten einen kleinen blauen Schleim beschwören

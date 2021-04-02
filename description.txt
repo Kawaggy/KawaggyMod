@@ -1,0 +1,15 @@
+Kawaggy's Mod currently adds:
+- A few items to help you in the progression.
+- Support for various mods.
+- Recipes for many things that don't have recipes.
+
+Coders: Kawaggy.
+Spriters: Yharex87, Kawaggy.
+Ideas: Kawaggy, Yharex87, AliciaFox.
+
+How to contact them (Discord tags):
+  - Kawaggy: Kawaggy#0290
+  - AliciaFox: Awi#5229
+  - Yharex87: Yharex87#6681
+
+This mods' Discord: https://discord.gg/eJUJ5y7
