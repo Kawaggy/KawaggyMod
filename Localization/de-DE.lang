@@ -15,3 +15,9 @@ ItemTooltip.PinkGelArrow=Gibt Pfeilen eine kleine Chance einen Hüpfpfeil abzusc
 
 ItemTooltip.PinkGelCrown=Lässt deine Beschwörungen selten Leben stehlen
 ItemTooltip.BlueGelCrown=Lässt deine Beschwörungen selten einen kleinen blauen Schleim beschwören
+
+ItemName.StrangeLookingActiveStoneBlock=Seltsam aussehender aktiver Steinblock
+ItemTooltip.StrangeLookingActiveStoneBlock=Beschwört einen kleinen Felsbrocken, um dich zu beschützen
+
+BuffName.BouldySummonBuff=Bouldy Beschwörung
+BuffDescription.BouldySummonBuff=Ein kleiner Felsbrocken ist hier, um dich zu beschützen

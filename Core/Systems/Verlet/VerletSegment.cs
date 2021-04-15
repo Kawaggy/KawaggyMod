@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace KawaggyMod.Core
+namespace KawaggyMod.Core.Systems.Verlet
 {
     public struct VerletSegment
     {
@@ -8,11 +8,11 @@ namespace KawaggyMod.Core
         public Vector2 oldPosition;
         public Vector2 center;
 
-        public VerletSegment(Vector2 pos)
+        public VerletSegment(Vector2 position)
         {
-            position = pos;
-            oldPosition = pos;
-            center = pos;
+            this.position = position;
+            this.oldPosition = position;
+            this.center = position;
         }
     }
 }

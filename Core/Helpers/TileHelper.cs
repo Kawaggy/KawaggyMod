@@ -3,7 +3,7 @@ using Terraria;
 
 namespace KawaggyMod.Core.Helpers
 {
-    public static class TileHelpers
+    public static class TileHelper
     {
         public static Vector2 TileOffset => Lighting.lightMode > 1 ? Vector2.Zero : Vector2.One * 12;
 

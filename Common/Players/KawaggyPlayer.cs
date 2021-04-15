@@ -23,13 +23,5 @@ namespace KawaggyMod.Common.Players
             ResetRanger();
             ResetSummoner();
         }
-
-        public override void PostUpdate()
-        {
-            if (player.ownedProjectileCounts[ModContent.ProjectileType<Bouldy>()] <= 0)
-            {
-                Projectile.NewProjectile(player.position, player.velocity, ModContent.ProjectileType<Bouldy>(), 20, 1f, player.whoAmI);
-            }
-        }
     }
 }

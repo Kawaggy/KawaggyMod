@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.Enums;
 
-namespace KawaggyMod.Core
+namespace KawaggyMod.Core.Systems.Verlet
 {
-    public class VerletChain
+    public class Verlet
     {
         public List<VerletSegment> segments;
         public bool FirstTick;
@@ -16,7 +16,7 @@ namespace KawaggyMod.Core
         public int width;
         public int constraintSimulations;
 
-        public VerletChain()
+        public Verlet()
         {
             segments = new List<VerletSegment>();
             segmentNum = 32;
@@ -26,7 +26,7 @@ namespace KawaggyMod.Core
             FirstTick = true;
         }
 
-        public VerletChain(int segmentAmount, float height, int width, int constraintSimulations)
+        public Verlet(int segmentAmount, float height, int width, int constraintSimulations)
         {
             segments = new List<VerletSegment>();
             segmentNum = segmentAmount;
@@ -44,9 +44,9 @@ namespace KawaggyMod.Core
         {
         }
 
-        public void OnDestroy()
+        public void Dispose()
         {
-            Dispose();
+            OnDispose();
             segments = null;
             FirstTick = false;
             height = 0f;
@@ -58,7 +58,7 @@ namespace KawaggyMod.Core
         /// <summary>
         /// Override this so that you can properly get rid of any data that you do not need anymore after the Verlet Chain has been destroyed
         /// </summary>
-        public virtual void Dispose()
+        public virtual void OnDispose()
         {
         }
 
@@ -66,7 +66,7 @@ namespace KawaggyMod.Core
         /// Use this to properly setup the Verlet Chain
         /// </summary>
         /// <param name="startPoint">Where the verlet chain should be spawned at</param>
-        public void OnStart(Vector2? startPoint = null)
+        public void Start(Vector2? startPoint = null)
         {
             if (FirstTick)
             {
@@ -119,7 +119,7 @@ namespace KawaggyMod.Core
         /// <summary>
         /// Use this to simulate the Verlet Chain
         /// </summary>
-        public void Simulate()
+        public void Update()
         {
             for (int i = 0; i < segments.Count; i++)
             {
@@ -152,7 +152,7 @@ namespace KawaggyMod.Core
         /// <summary>
         /// Method to apply constraints
         /// </summary>
-        public void ApplyConstraints()
+        public virtual void ApplyConstraints()
         {
             for (int i = 0; i < segments.Count - 1; i++)
             {
@@ -241,6 +241,13 @@ namespace KawaggyMod.Core
                     segments.RemoveAt(segments.Count - 1);
                 }
             }
+            else
+            {
+                while(segments.Count > 2)
+                {
+                    segments.RemoveAt(segments.Count - 1);
+                }
+            }
         }
 
         public void CutTiles()
@@ -267,6 +274,23 @@ namespace KawaggyMod.Core
                     return true;
             }
             return false;
+        }
+
+        public void DebugDraw(SpriteBatch spriteBatch, Color color)
+        {
+            for (int i = 0; i < segments.Count; i++)
+            {
+                spriteBatch.Draw(
+                    Main.magicPixel,
+                    segments[i].center - Main.screenPosition,
+                    new Rectangle(0, 0, 2, 2),
+                    color,
+                    0f,
+                    new Vector2(0),
+                    1f,
+                    SpriteEffects.None,
+                    0f);
+            }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch, Color color, Texture2D texture, bool overrideWidth = false)

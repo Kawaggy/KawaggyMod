@@ -37,3 +37,9 @@ ItemTooltip.BlueGelCrown=Makes your summons rarely summon a mini blue slime
 
 ItemName.PinkGelCrown={$Mods.KawaggyMod.Common.PinkGelCrown}
 ItemTooltip.PinkGelCrown=Makes your summons rarely steal life
+
+ItemName.StrangeLookingActiveStoneBlock=Strange Looking Active Stone Block
+ItemTooltip.StrangeLookingActiveStoneBlock=Summons a small Boulder to protect you
+
+BuffName.BouldySummonBuff=Bouldy Summon
+BuffDescription.BouldySummonBuff=A small boulder is here to protect you

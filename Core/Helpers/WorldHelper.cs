@@ -10,11 +10,17 @@ namespace KawaggyMod.Core.Helpers
             if (Main.netMode == NetmodeID.Server)
                 NetMessage.SendData(MessageID.WorldData);
         }
+
         /// <summary>
-        ///
+        /// Add an item to any chest during World Generation
         /// </summary>
-        /// <returns></returns>
-        public static (int, int, bool) AddItemToChest(int chestID, float chance, int itemsToPlaceInChest, int min = 1, int max = 0)
+        /// <param name="chestID">ChestID to place items in</param>
+        /// <param name="chance">The chance</param>
+        /// <param name="itemToPlaceInChest">The item to place in the chests</param>
+        /// <param name="min">Minimum amount of items to add. If minimum is higher than maximum then it'll be garanteed amount</param>
+        /// <param name="max">Maximum amount of items to add. If maximum is higher than minimum then it'll be a random amount between them</param>
+        /// <returns>Number of items, how many times and if it succeeded</returns>
+        public static (int, int, bool) AddItemToChest(int chestID, float chance, int itemToPlaceInChest, int min = 1, int max = 0)
         {
             int howManyItems = 0;
             int howManyTimes = 0;
@@ -36,7 +42,7 @@ namespace KawaggyMod.Core.Helpers
                         {
                             if (WorldGen.genRand.NextFloat() < chance)
                             {
-                                chest.item[inventoryIndex].SetDefaults(itemsToPlaceInChest);
+                                chest.item[inventoryIndex].SetDefaults(itemToPlaceInChest);
                                 chest.item[inventoryIndex].stack = itemAmount;
                                 howManyItems += itemAmount;
                                 howManyTimes++;
@@ -52,15 +58,15 @@ namespace KawaggyMod.Core.Helpers
         }
 
         /// <summary>
-        /// Adds items to a chest
+        /// Add an item to any chest during World Generation
         /// </summary>
-        /// <param name="chestID"></param>
-        /// <param name="chance"></param>
-        /// <param name="itemsToPlaceInChest"></param>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
+        /// <param name="chestID">ChestID to place items in</param>
+        /// <param name="chance">The chance</param>
+        /// <param name="itemToPlaceInChest">The item to place in the chests</param>
+        /// <param name="min">Minimum amount of items to add. If minimum is higher than maximum then it'll be garanteed amount</param>
+        /// <param name="max">Maximum amount of items to add. If maximum is higher than minimum then it'll be a random amount between them</param>
         /// <returns>Number of items, how many times and if it succeeded</returns>
-        public static (int, int, bool) AddItemToChest(int chestID, int chance, int itemsToPlaceInChest, int min = 1, int max = 0)
+        public static (int, int, bool) AddItemToChest(int chestID, int chance, int itemToPlaceInChest, int min = 1, int max = 0)
         {
             int howManyItems = 0;
             int howManyTimes = 0;
@@ -82,7 +88,7 @@ namespace KawaggyMod.Core.Helpers
                         {
                             if (WorldGen.genRand.Next(chance) == 0)
                             {
-                                chest.item[inventoryIndex].SetDefaults(itemsToPlaceInChest);
+                                chest.item[inventoryIndex].SetDefaults(itemToPlaceInChest);
                                 chest.item[inventoryIndex].stack = itemAmount;
                                 howManyItems += itemAmount;
                                 howManyTimes++;

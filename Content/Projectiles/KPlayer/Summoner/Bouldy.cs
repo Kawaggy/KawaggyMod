@@ -1,4 +1,5 @@
-﻿using KawaggyMod.Core;
+﻿using KawaggyMod.Content.Buffs.Summoner;
+using KawaggyMod.Core;
 using KawaggyMod.Core.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -91,13 +92,13 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
         public override void AI()
         {
             Player player = Main.player[projectile.owner];
-            /*
+            
             if (player.dead || !player.active)
-                player.ClearBuff(1); //replace to new buff
+                player.ClearBuff(ModContent.BuffType<BouldySummonBuff>());
 
-            if (player.HasBuff(1)) //replace to new buff
+            if (player.HasBuff(ModContent.BuffType<BouldySummonBuff>()))
                 projectile.timeLeft = 2;
-            */
+            
             Vector2 idlePosition = player.Center;
             idlePosition.X += (10 + projectile.minionPos * 40) * -player.direction;
 
@@ -316,6 +317,9 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
 
         public void PlaySound(float volume, float pitch, bool forceExplosion = false)
         {
+            if (projectile.IsInsideTile())
+                return;
+
             if (fireIntensity < 0.25f && !forceExplosion)
             {
                 Main.PlaySound(SoundID.Tink, (int)projectile.position.X, (int)projectile.position.Y, 1, volume, pitch);
