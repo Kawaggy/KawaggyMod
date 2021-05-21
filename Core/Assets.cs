@@ -36,6 +36,12 @@
             public const string Player = ProjectilesPath + "KPlayer/";
         }
 
+        public static class NPCs
+        {
+            public const string NPCsPath = Textures + "NPCs/";
+            public const string Enemies = NPCsPath + "Enemies/";
+        }
+
         public static class Gores
         {
             public const string GoresPath = "KawaggyMod/Gores/";

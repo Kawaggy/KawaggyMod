@@ -6,15 +6,15 @@ using Terraria.ModLoader.IO;
 
 namespace KawaggyMod.Common.Worlds
 {
-    public class KawaggyWorld_Dissonance : ModWorld
+    public class KawaggyWorld_Sadism : ModWorld
     {
-        public static bool dissonanceMode;
+        public static bool sadismMode;
         public static int bagFrame;
         public static int bagFrameCounter;
 
         public override void Initialize()
         {
-            dissonanceMode = false;
+            sadismMode = false;
             bagFrame = 0;
             bagFrameCounter = 0;
         }
@@ -33,7 +33,7 @@ namespace KawaggyMod.Common.Worlds
         public override TagCompound Save()
         {
             var downed = new List<string>();
-            if (dissonanceMode) downed.Add("dissonanceMode");
+            if (sadismMode) downed.Add("sadismMode");
 
             return new TagCompound
             {
@@ -44,13 +44,13 @@ namespace KawaggyMod.Common.Worlds
         public override void Load(TagCompound tag)
         {
             var downed = tag.GetList<string>("downed");
-            dissonanceMode = downed.Contains("dissonanceMode");
+            sadismMode = downed.Contains("sadismMode");
         }
 
         public override void NetSend(BinaryWriter writer)
         {
             BitsByte flags = new BitsByte();
-            flags[0] = dissonanceMode;
+            flags[0] = sadismMode;
 
             writer.Write(flags);
         }
@@ -58,7 +58,7 @@ namespace KawaggyMod.Common.Worlds
         public override void NetReceive(BinaryReader reader)
         {
             BitsByte flags = reader.ReadByte();
-            dissonanceMode = flags[0];
+            sadismMode = flags[0];
         }
     }
 }

@@ -24,7 +24,7 @@
     <Folder Include="Common\GlobalNPCs\" />
     <Folder Include="Common\GlobalProjectiles\" />
     <Folder Include="Content\Items\Usables\Consumables\DifficultyItems\" />
-    <Folder Include="Content\NPCs\" />
+    <Folder Include="Core\Systems\InverseKinematics\" />
     <Folder Include="Effects\" />
     <Folder Include="Gores\" />
     <Folder Include="Sounds\NPCHit\" />

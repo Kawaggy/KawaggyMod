@@ -103,6 +103,6 @@ namespace KawaggyMod.Core.NewTypes.ItemTypes
             item.position.Y - Main.screenPosition.Y + item.height * 0.5f - 8f), DustFrame, Color.White, rotation, new Vector2(26, 24), scale, SpriteEffects.None, 0f);
         }
 
-        internal Rectangle DustFrame => new Rectangle(0, (240 / 5) * KawaggyWorld_Dissonance.bagFrame, 52, 240 / 5);
+        internal Rectangle DustFrame => new Rectangle(0, (240 / 5) * KawaggyWorld_Sadism.bagFrame, 52, 240 / 5);
     }
 }
