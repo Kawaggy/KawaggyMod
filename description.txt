@@ -1,7 +1,4 @@
 Kawaggy's Mod currently adds:
-- A few items to help you in the progression.
-- Support for various mods.
-- Recipes for many things that don't have recipes.
 
 Coders: Kawaggy.
 Spriters: Yharex87, Kawaggy.

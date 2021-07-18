@@ -1,0 +1,7 @@
+tMod wiki said first line has bug so it is recomended to make the first line not a localization thing
+Common.AmountOfExtraSprites=Anzahl zusätzlicher Sprites
+
+ItemName.CrackedIceOrb=Gebrochene Eiskugel
+ItemTooltip.CrackedIceOrb=Beschwört ein magisches fliegendes Eisschwert um dich zu beschützen
+
+ProjectileName.IceSwords=Eisschwert
