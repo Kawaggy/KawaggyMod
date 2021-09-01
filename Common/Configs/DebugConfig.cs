@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using Terraria.ModLoader.Config;
 
-namespace KawaggyMod.Content.Configs
+namespace KawaggyMod.Common.Configs
 {
     public class DebugConfig : ModConfig
     {

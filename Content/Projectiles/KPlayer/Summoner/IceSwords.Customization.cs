@@ -42,25 +42,26 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
                                 exists = true;
                                 string[] theSettings = File.ReadAllLines(setting);
 
+                                string thePath = Path.GetFileNameWithoutExtension(picture);
                                 if (theSettings.Length >= 3)
                                 {
                                     if (theSettings[0].ToLower() != "horizontal" && theSettings[0].ToLower() == "vertical")
                                         horizontal = false;
-                                    else
-                                        wrongFormat = (true, Path.Combine(SavePath, Path.GetFileNameWithoutExtension(picture)) + ".txt", "direction | ");
+                                    else if (theSettings[0].ToLower() != "horizontal")
+                                        wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", "direction | ");
 
                                     if (int.TryParse(theSettings[1], out int framesAmount))
                                         frames = (int)MathHelper.Clamp(framesAmount, 1, float.MaxValue);
                                     else
-                                        wrongFormat = (true, Path.Combine(SavePath, Path.GetFileNameWithoutExtension(picture)) + ".txt", wrongFormat.reason + "frames | ");
+                                        wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "frames | ");
 
                                     if (int.TryParse(theSettings[2], out int paddingAmount))
                                         padding = (int)MathHelper.Clamp(paddingAmount, 0, float.MaxValue);
                                     else
-                                        wrongFormat = (true, Path.Combine(SavePath, Path.GetFileNameWithoutExtension(picture)) + ".txt", wrongFormat.reason + "padding");
+                                        wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "padding");
                                 }
                                 else
-                                    wrongFormat = (true, Path.Combine(SavePath, Path.GetFileNameWithoutExtension(picture)) + ".txt", "lines");
+                                    wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", "lines");
                             }
                         }
 
@@ -79,7 +80,7 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
                             KawaggyMod.Instance.Logger.Warn($"{wrongFormat.path} is the wrong format because of {wrongFormat.reason}! Using default settings instead");
                         }
 
-                        using (var file = File.OpenRead(picture))
+                        using (FileStream file = File.OpenRead(picture))
                         {
                             for (int i = 0; i < frames; i++)
                             {

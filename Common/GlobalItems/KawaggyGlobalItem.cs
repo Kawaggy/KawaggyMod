@@ -1,11 +1,11 @@
-﻿using KawaggyMod.Content.Configs;
+﻿using KawaggyMod.Common.Configs;
 using KawaggyMod.Core.Interfaces;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace KawaggyMod.Content.Globals.GlobalItems
+namespace KawaggyMod.Common.GlobalItems
 {
     public class KawaggyGlobalItem : GlobalItem
     {
@@ -15,7 +15,7 @@ namespace KawaggyMod.Content.Globals.GlobalItems
             {
                 if (ModContent.GetInstance<DebugConfig>().ShowExtraSpritesCount)
                 {
-                    string theText = Language.GetTextValue("Mods.KawaggyMod.Common.AmountOfExtraSprites") + ": " + (customized.Count);
+                    string theText = Language.GetTextValue($"Mods.KawaggyMod.Common.AmountOfExtraSprites", customized.Count);
                     tooltips.Add(new TooltipLine(mod, "AmountOfSprites", theText));
                 }
             }

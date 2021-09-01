@@ -40,7 +40,7 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
         {
             Texture2D texture = ModContent.GetTexture(Texture);
 
-            projectile.frame = (int)MathHelper.Clamp(projectile.frame, 0, IceSwordsCustomization.FrameAmount);
+            projectile.frame = (int)MathHelper.Clamp(projectile.frame, 0, IceSwordsCustomization.FrameAmount - 1);
             Rectangle theFrame = new Rectangle(projectile.frame * 18, 0, 18, 44);
 
             if (projectile.frame > 4)

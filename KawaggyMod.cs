@@ -1,4 +1,5 @@
 using KawaggyMod.Content.Projectiles.KPlayer.Summoner;
+using KawaggyMod.Core;
 using System.IO;
 using Terraria;
 using Terraria.ModLoader;
@@ -18,13 +19,19 @@ namespace KawaggyMod
 
             if (!Directory.Exists(SavePath))
                 Directory.CreateDirectory(SavePath);
-
-            IceSwordsCustomization.Load();
+            if (!Main.dedServ)
+            {
+                ReadMe.GenerateOrUpdate(this);
+                IceSwordsCustomization.Load();
+            }
         }
 
         public override void Unload()
         {
-            IceSwordsCustomization.Unload();
+            if (!Main.dedServ)
+            {
+                IceSwordsCustomization.Unload();
+            }
             SavePath = null;
             Instance = null;
         }
