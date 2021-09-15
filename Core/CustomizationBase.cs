@@ -81,20 +81,38 @@ namespace KawaggyMod.Core
                                 {
                                     try
                                     {
-                                        if (int.TryParse(theSettings[0].Split(theChar)[1], out int horizontalSetting))
-                                            horizontal = horizontalSetting;
+                                        string[] horizontalLine = theSettings[0].Split(theChar);
+                                        if (horizontalLine.Length >= 2)
+                                        {
+                                            if (int.TryParse(horizontalLine[1], out int horizontalSetting))
+                                                horizontal = horizontalSetting;
+                                            else
+                                                wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "direction, ");
+                                        }
                                         else
-                                            wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "direction, ");
+                                            wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "direction line, ");
 
-                                        if (int.TryParse(theSettings[1].Split(theChar)[1], out int framesCount))
-                                            frames = (int)MathHelper.Clamp(framesCount, 1, float.MaxValue);
+                                        string[] framesLine = theSettings[1].Split(theChar);
+                                        if (framesLine.Length >= 2)
+                                        {
+                                            if (int.TryParse(framesLine[1], out int framesCount))
+                                                frames = (int)MathHelper.Clamp(framesCount, 1, float.MaxValue);
+                                            else
+                                                wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "frames, ");
+                                        }
                                         else
-                                            wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "frames, ");
+                                            wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "frames line, ");
 
-                                        if (int.TryParse(theSettings[2].Split(theChar)[1], out int paddingAmount))
-                                            padding = (int)MathHelper.Clamp(paddingAmount, 0, float.MaxValue);
+                                        string[] paddingLine = theSettings[2].Split(theChar);
+                                        if (paddingLine.Length >= 2)
+                                        {
+                                            if (int.TryParse(paddingLine[1], out int paddingAmount))
+                                                padding = (int)MathHelper.Clamp(paddingAmount, 0, float.MaxValue);
+                                            else
+                                                wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "padding");
+                                        }
                                         else
-                                            wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "padding");
+                                            wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "padding line");
                                     }
                                     catch (Exception e)
                                     {
@@ -102,7 +120,7 @@ namespace KawaggyMod.Core
                                     }
                                 }
                                 else
-                                    wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "lines");
+                                    wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "line count");
                             }
                         }
 
@@ -119,7 +137,7 @@ namespace KawaggyMod.Core
 
                         if (wrongFormat.isWrongFormat)
                         {
-                            KawaggyMod.Instance.Logger.Warn($"{wrongFormat.path} is the wrong format because of {wrongFormat.reason}! Using default settings instead");
+                            KawaggyMod.Instance.Logger.Warn($"{wrongFormat.path} is the wrong format because of {wrongFormat.reason}! Using default settings instead.");
                         }
 
                         using (FileStream file = File.OpenRead(image))

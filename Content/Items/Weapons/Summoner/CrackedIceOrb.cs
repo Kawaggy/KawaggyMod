@@ -69,7 +69,7 @@ namespace KawaggyMod.Content.Items.Weapons.Summoner
         int frame;
         int counter;
 
-        public int Count => CustomizationManager.iceSwords.FrameCount - 5;
+        public int Count => CustomizationManager.iceSwords.cache.Count;
 
         internal Rectangle ShineFrame()
         {

@@ -21,9 +21,9 @@ namespace KawaggyMod
 
             if (!Main.dedServ)
             {
-                ReadMe.GenerateOrUpdate(this);
                 CustomizationManager.Load();
                 Shaders.Load(this);
+                ReadMe.GenerateOrUpdate(this);
             }
         }
 

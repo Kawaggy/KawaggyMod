@@ -2,15 +2,14 @@
 
 namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
 {
-    public class IceSwordsCustomization : CustomizationBase
+    public class CloudSummonCustomization : CustomizationBase
     {
-        public IceSwordsCustomization() : base("IceSwords", 18, 44) { }
-
+        public CloudSummonCustomization() : base("CloudSummon", 32, 32) { }
         public override int FrameCount
         {
             get
             {
-                return cache.Count + 5;
+                return cache.Count + 11;
             }
             set
             {

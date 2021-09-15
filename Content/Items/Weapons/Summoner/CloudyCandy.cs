@@ -3,11 +3,6 @@ using KawaggyMod.Content.Projectiles.KPlayer.Summoner;
 using KawaggyMod.Core;
 using KawaggyMod.Core.Interfaces;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -16,7 +11,7 @@ namespace KawaggyMod.Content.Items.Weapons.Summoner
 {
     public class CloudyCandy : ModItem, ICustomizable
     {
-        public int Count => 0;
+        public int Count => CustomizationManager.cloudSummon.cache.Count;
 
         public override void SetStaticDefaults()
         {
@@ -28,7 +23,7 @@ namespace KawaggyMod.Content.Items.Weapons.Summoner
         {
             item.width = 18;
             item.height = 18;
-            item.damage = 24;
+            item.damage = 10;
             item.knockBack = 3f;
             item.mana = 10;
             item.useTime = 36;
@@ -56,8 +51,7 @@ namespace KawaggyMod.Content.Items.Weapons.Summoner
             player.AddBuff(item.buffType, 2);
             position = Main.MouseWorld;
 
-            //Main.projectile[Projectile.NewProjectile(position, new Vector2(speedX, speedY), type, damage, knockBack, player.whoAmI)].frame = Main.rand.Next(0, CustomizationManager.iceSwords.FrameCount);
-            (Main.projectile[Projectile.NewProjectile(position, new Vector2(speedX, speedY), type, damage, knockBack, player.whoAmI)].modProjectile as CloudSummon).faceFrame = Main.rand.Next(0, 10);
+            (Main.projectile[Projectile.NewProjectile(position, new Vector2(speedX, speedY), type, damage, knockBack, player.whoAmI)].modProjectile as CloudSummon).faceFrame = Main.rand.Next(0, CustomizationManager.cloudSummon.FrameCount);
             return false;
         }
     }
