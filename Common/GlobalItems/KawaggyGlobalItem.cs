@@ -1,4 +1,5 @@
 ﻿using KawaggyMod.Common.Configs;
+using KawaggyMod.Core.Helpers;
 using KawaggyMod.Core.Interfaces;
 using System.Collections.Generic;
 using Terraria;
@@ -18,6 +19,11 @@ namespace KawaggyMod.Common.GlobalItems
                     string theText = Language.GetTextValue($"Mods.KawaggyMod.Common.AmountOfExtraSprites", customized.Count);
                     tooltips.Add(new TooltipLine(mod, "AmountOfSprites", theText));
                 }
+            }
+
+            if (item.modItem is ICustomRarity)
+            {
+                ItemHelper.CheckRarity(item.rare, ref tooltips);
             }
         }
     }

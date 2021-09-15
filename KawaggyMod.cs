@@ -1,4 +1,3 @@
-using KawaggyMod.Content.Projectiles.KPlayer.Summoner;
 using KawaggyMod.Core;
 using System.IO;
 using Terraria;
@@ -6,9 +5,9 @@ using Terraria.ModLoader;
 
 namespace KawaggyMod
 {
-	public class KawaggyMod : Mod
-	{
-		public static KawaggyMod Instance { get; private set; }
+    public class KawaggyMod : Mod
+    {
+        public static KawaggyMod Instance { get; private set; }
         public static string SavePath { get; private set; }
 
         public override void Load()
@@ -19,10 +18,12 @@ namespace KawaggyMod
 
             if (!Directory.Exists(SavePath))
                 Directory.CreateDirectory(SavePath);
+
             if (!Main.dedServ)
             {
                 ReadMe.GenerateOrUpdate(this);
-                IceSwordsCustomization.Load();
+                CustomizationManager.Load();
+                Shaders.Load(this);
             }
         }
 
@@ -30,7 +31,7 @@ namespace KawaggyMod
         {
             if (!Main.dedServ)
             {
-                IceSwordsCustomization.Unload();
+                CustomizationManager.Unload();
             }
             SavePath = null;
             Instance = null;

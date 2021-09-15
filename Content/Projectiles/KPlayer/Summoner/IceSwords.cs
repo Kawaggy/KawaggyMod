@@ -1,4 +1,5 @@
 ﻿using KawaggyMod.Content.Buffs.Summoner;
+using KawaggyMod.Core;
 using KawaggyMod.Core.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -40,13 +41,13 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
         {
             Texture2D texture = ModContent.GetTexture(Texture);
 
-            projectile.frame = (int)MathHelper.Clamp(projectile.frame, 0, IceSwordsCustomization.FrameAmount - 1);
+            projectile.frame = (int)MathHelper.Clamp(projectile.frame, 0, CustomizationManager.iceSwords.FrameCount - 1);
             Rectangle theFrame = new Rectangle(projectile.frame * 18, 0, 18, 44);
 
             if (projectile.frame > 4)
             {
-                texture = IceSwordsCustomization.TextureCache.cache[projectile.frame - 5].texture;
-                theFrame = IceSwordsCustomization.TextureCache.cache[projectile.frame - 5].frame;
+                texture = CustomizationManager.iceSwords.cache[projectile.frame - 5].texture;
+                theFrame = CustomizationManager.iceSwords.cache[projectile.frame - 5].frame;
             }
 
             Vector2 origin = new Vector2(9, 6);

@@ -1,5 +1,6 @@
 ﻿using KawaggyMod.Content.Buffs.Summoner;
 using KawaggyMod.Content.Projectiles.KPlayer.Summoner;
+using KawaggyMod.Core;
 using KawaggyMod.Core.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -49,7 +50,7 @@ namespace KawaggyMod.Content.Items.Weapons.Summoner
             player.AddBuff(item.buffType, 2);
             position = Main.MouseWorld;
 
-            Main.projectile[Projectile.NewProjectile(position, new Vector2(speedX, speedY), type, damage, knockBack, player.whoAmI)].frame = Main.rand.Next(0, IceSwordsCustomization.FrameAmount);
+            Main.projectile[Projectile.NewProjectile(position, new Vector2(speedX, speedY), type, damage, knockBack, player.whoAmI)].frame = Main.rand.Next(0, CustomizationManager.iceSwords.FrameCount);
             return false;
         }
 
@@ -68,7 +69,7 @@ namespace KawaggyMod.Content.Items.Weapons.Summoner
         int frame;
         int counter;
 
-        public int Count => IceSwordsCustomization.FrameAmount - 5;
+        public int Count => CustomizationManager.iceSwords.FrameCount - 5;
 
         internal Rectangle ShineFrame()
         {

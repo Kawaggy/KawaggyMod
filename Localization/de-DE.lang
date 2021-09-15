@@ -1,5 +1,7 @@
 tMod wiki said first line has bug so it is recomended to make the first line not a localization thing
 Common.AmountOfExtraSprites=Anzahl zusätzlicher Sprites: {0}
+Common.DeveloperMale=Entwickler
+Common.DeveloperFemale=Entwicklerin
 
 
 #Items
