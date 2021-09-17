@@ -11,10 +11,6 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
             {
                 return cache.Count + 11;
             }
-            set
-            {
-                FrameCount = value;
-            }
         }
     }
 }

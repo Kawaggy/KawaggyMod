@@ -27,12 +27,18 @@ namespace KawaggyMod
             }
         }
 
+        public override void PostSetupContent()
+        {
+            ModCompatibilityManager.Load();
+        }
+
         public override void Unload()
         {
             if (!Main.dedServ)
             {
                 CustomizationManager.Unload();
             }
+            ModCompatibilityManager.Unload();
             SavePath = null;
             Instance = null;
         }

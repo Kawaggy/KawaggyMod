@@ -28,7 +28,7 @@ namespace KawaggyMod.Core
             }
         }
 
-        public abstract int FrameCount { get; set; }
+        public abstract int FrameCount { get; }
 
         public List<(Texture2D texture, Rectangle frame)> cache;
 
@@ -187,7 +187,6 @@ namespace KawaggyMod.Core
         {
             cache.Clear();
             cache = null;
-            FrameCount = 0;
             customizationObject = null;
             width = 0;
             height = 0;
