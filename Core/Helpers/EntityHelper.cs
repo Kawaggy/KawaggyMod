@@ -10,9 +10,9 @@ namespace KawaggyMod.Core.Helpers
         public delegate bool NPCLogic(NPC npc);
         public delegate bool ProjectileLogic(Projectile projectile);
         
-        public static (int?, float) FindClosest<T>(this Entity entity, PlayerLogic playerLogic) where T : Player
+        public static (Player closest, float distance) FindClosest<T>(this Entity entity, PlayerLogic playerLogic) where T : Player
         {
-            int? closest = null;
+            Player closest = null;
             float distance = float.PositiveInfinity;
 
             for (int i = 0; i < Main.maxPlayers; i++)
@@ -32,7 +32,7 @@ namespace KawaggyMod.Core.Helpers
                         if (newDistance < distance)
                         {
                             distance = newDistance;
-                            closest = i;
+                            closest = Main.player[i];
                         }
                     }
                 }
@@ -41,9 +41,9 @@ namespace KawaggyMod.Core.Helpers
             return (closest, distance);
         }
 
-        public static (int?, float) FindClosest<T>(this Entity entity, NPCLogic npcLogic) where T : NPC
+        public static (NPC closest, float distance) FindClosest<T>(this Entity entity, NPCLogic npcLogic) where T : NPC
         {
-            int? closest = null;
+            NPC closest = null;
             float distance = float.PositiveInfinity;
 
             for (int i = 0; i < Main.maxNPCs; i++)
@@ -63,7 +63,7 @@ namespace KawaggyMod.Core.Helpers
                         if (newDistance < distance)
                         {
                             distance = newDistance;
-                            closest = i;
+                            closest = Main.npc[i];
                         }
                     }
                 }
@@ -72,9 +72,9 @@ namespace KawaggyMod.Core.Helpers
             return (closest, distance);
         }
 
-        public static (int?, float) FindClosest<T>(this Entity entity, ProjectileLogic projectileLogic) where T : Projectile
+        public static (Projectile closest, float distance) FindClosest<T>(this Entity entity, ProjectileLogic projectileLogic) where T : Projectile
         {
-            int? closest = null;
+            Projectile closest = null;
             float distance = float.PositiveInfinity;
 
             for (int i = 0; i < Main.maxProjectiles; i++)
@@ -94,7 +94,7 @@ namespace KawaggyMod.Core.Helpers
                         if (newDistance < distance)
                         {
                             distance = newDistance;
-                            closest = i;
+                            closest = Main.projectile[i];
                         }
                     }
                 }
