@@ -30,7 +30,7 @@ namespace KawaggyMod.Core
 
         public abstract int FrameCount { get; }
 
-        public List<(Texture2D texture, Rectangle frame)> cache;
+        public List<FramedTexture2D> cache;
 
         /// <summary>
         /// For custom loading of images. Has SimpleLoad called inside it.
@@ -48,7 +48,7 @@ namespace KawaggyMod.Core
             if (!Directory.Exists(SavePath))
                 Directory.CreateDirectory(SavePath);
 
-            cache = new List<(Texture2D texture, Rectangle frame)>();
+            cache = new List<FramedTexture2D>();
 
             if (Directory.GetFiles(SavePath).Length != 0)
             {
@@ -167,7 +167,7 @@ namespace KawaggyMod.Core
 
                                 if (frame != Rectangle.Empty)
                                 {
-                                    cache.Add((Texture2D.FromStream(Main.graphics.GraphicsDevice, file), frame));
+                                    cache.Add(new FramedTexture2D(Texture2D.FromStream(Main.graphics.GraphicsDevice, file), frame));
                                 }
                             }
                         }
