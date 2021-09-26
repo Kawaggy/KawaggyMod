@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using KawaggyMod.Core.DataTypes;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -77,42 +78,14 @@ namespace KawaggyMod.Core
                                 string thePath = Path.GetFileNameWithoutExtension(image);
 
                                 char[] theChar = "=".ToCharArray();
-                                if (theSettings.Length >= 3)
+                                if (theSettings.Length >= 1)
                                 {
                                     try
                                     {
-                                        string[] horizontalLine = theSettings[0].Split(theChar);
-                                        if (horizontalLine.Length >= 2)
+                                        for (int i = 0; i < theSettings.Length; i++)
                                         {
-                                            if (int.TryParse(horizontalLine[1], out int horizontalSetting))
-                                                horizontal = horizontalSetting;
-                                            else
-                                                wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "direction, ");
+                                            ReadSetting(theSettings[i].Split(theChar), thePath, ref horizontal, ref frames, ref padding, ref wrongFormat);
                                         }
-                                        else
-                                            wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "direction line, ");
-
-                                        string[] framesLine = theSettings[1].Split(theChar);
-                                        if (framesLine.Length >= 2)
-                                        {
-                                            if (int.TryParse(framesLine[1], out int framesCount))
-                                                frames = (int)MathHelper.Clamp(framesCount, 1, float.MaxValue);
-                                            else
-                                                wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "frames, ");
-                                        }
-                                        else
-                                            wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "frames line, ");
-
-                                        string[] paddingLine = theSettings[2].Split(theChar);
-                                        if (paddingLine.Length >= 2)
-                                        {
-                                            if (int.TryParse(paddingLine[1], out int paddingAmount))
-                                                padding = (int)MathHelper.Clamp(paddingAmount, 0, float.MaxValue);
-                                            else
-                                                wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "padding");
-                                        }
-                                        else
-                                            wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "padding line");
                                     }
                                     catch (Exception e)
                                     {
@@ -120,7 +93,7 @@ namespace KawaggyMod.Core
                                     }
                                 }
                                 else
-                                    wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "line count");
+                                    wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "no lines found");
                             }
                         }
 
@@ -175,6 +148,44 @@ namespace KawaggyMod.Core
 
                     string word = cache.Count > 1 ? "sprites" : "sprite";
                     KawaggyMod.Instance.Logger.Info($"Added {cache.Count} {word} to cache for {customizationObject}!");
+                }
+            }
+            else
+            {
+                KawaggyMod.Instance.Logger.Info($"No sprites found for {customizationObject}.");
+            }
+        }
+
+        internal void ReadSetting(string[] line, string thePath, ref int horizontal, ref int frames, ref int padding, ref (bool isWrongFormat, string path, string reason) wrongFormat)
+        {
+            if (line.Length >= 2)
+            {
+                switch(line[0].ToLower())
+                {
+                    case "horizontal":
+                        if (int.TryParse(line[1], out int horizontalSetting))
+                            horizontal = horizontalSetting;
+                        else
+                            wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "direction, ");
+                        break;
+
+                    case "frames":
+                        if (int.TryParse(line[1], out int framesCount))
+                            frames = (int)MathHelper.Clamp(framesCount, 1, float.MaxValue);
+                        else
+                            wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "frames, ");
+                        break;
+
+                    case "padding":
+                        if (int.TryParse(line[1], out int paddingAmount))
+                            padding = (int)MathHelper.Clamp(paddingAmount, 0, float.MaxValue);
+                        else
+                            wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "padding");
+                        break;
+
+                    default:
+                        wrongFormat = (true, Path.Combine(SavePath, thePath) + ".txt", wrongFormat.reason + "unkown line setting");
+                        break;
                 }
             }
         }

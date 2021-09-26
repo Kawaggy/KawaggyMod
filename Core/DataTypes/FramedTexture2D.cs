@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace KawaggyMod.Core
+namespace KawaggyMod.Core.DataTypes
 {
     public class FramedTexture2D
     {

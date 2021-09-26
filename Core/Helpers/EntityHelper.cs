@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using KawaggyMod.Core.DataTypes;
+using Terraria;
 using Terraria.ID;
 
 namespace KawaggyMod.Core.Helpers
@@ -10,10 +11,11 @@ namespace KawaggyMod.Core.Helpers
         public delegate bool NPCLogic(NPC npc);
         public delegate bool ProjectileLogic(Projectile projectile);
         
-        public static (Player closest, float distance) FindClosest<T>(this Entity entity, PlayerLogic playerLogic) where T : Player
+        public static PlayerData FindClosest<T>(this Entity entity, PlayerLogic playerLogic, bool needLineOfSight = false) where T : Player
         {
             Player closest = null;
             float distance = float.PositiveInfinity;
+            bool lineOfSight = false;
 
             for (int i = 0; i < Main.maxPlayers; i++)
             {
@@ -31,6 +33,10 @@ namespace KawaggyMod.Core.Helpers
                         float newDistance = entity.Distance(Main.player[i].Center);
                         if (newDistance < distance)
                         {
+                            bool tempLineOfSight = Collision.CanHitLine(entity.position, entity.width, entity.height, Main.player[i].position, Main.player[i].width, Main.player[i].height);
+                            if (needLineOfSight && !tempLineOfSight)
+                                continue;
+                            lineOfSight = tempLineOfSight;
                             distance = newDistance;
                             closest = Main.player[i];
                         }
@@ -38,14 +44,14 @@ namespace KawaggyMod.Core.Helpers
                 }
             }
 
-            return (closest, distance);
+            return new PlayerData(closest, distance, lineOfSight);
         }
 
-        public static (NPC closest, float distance) FindClosest<T>(this Entity entity, NPCLogic npcLogic) where T : NPC
+        public static NPCData FindClosest<T>(this Entity entity, NPCLogic npcLogic, bool needLineOfSight = false) where T : NPC
         {
             NPC closest = null;
             float distance = float.PositiveInfinity;
-
+            bool lineOfSight = false;
             for (int i = 0; i < Main.maxNPCs; i++)
             {
                 if (Main.npc[i].active && Main.npc[i].type != NPCID.TargetDummy)
@@ -62,6 +68,10 @@ namespace KawaggyMod.Core.Helpers
                         float newDistance = entity.Distance(Main.npc[i].Center);
                         if (newDistance < distance)
                         {
+                            bool tempLineOfSight = Collision.CanHitLine(entity.position, entity.width, entity.height, Main.npc[i].position, Main.npc[i].width, Main.npc[i].height);
+                            if (needLineOfSight && !tempLineOfSight)
+                                continue;
+                            lineOfSight = tempLineOfSight;
                             distance = newDistance;
                             closest = Main.npc[i];
                         }
@@ -69,14 +79,14 @@ namespace KawaggyMod.Core.Helpers
                 }
             }
 
-            return (closest, distance);
+            return new NPCData(closest, distance, lineOfSight);
         }
 
-        public static (Projectile closest, float distance) FindClosest<T>(this Entity entity, ProjectileLogic projectileLogic) where T : Projectile
+        public static ProjectileData FindClosest<T>(this Entity entity, ProjectileLogic projectileLogic, bool needLineOfSight = false) where T : Projectile
         {
             Projectile closest = null;
             float distance = float.PositiveInfinity;
-
+            bool lineOfSight = false;
             for (int i = 0; i < Main.maxProjectiles; i++)
             {
                 if (Main.projectile[i].active)
@@ -93,6 +103,11 @@ namespace KawaggyMod.Core.Helpers
                         float newDistance = entity.Distance(Main.projectile[i].Center);
                         if (newDistance < distance)
                         {
+                            bool tempLineOfSight = Collision.CanHitLine(entity.position, entity.width, entity.height, Main.projectile[i].position, Main.projectile[i].width, Main.projectile[i].height);
+                            if (needLineOfSight && !lineOfSight)
+                                continue;
+
+                            lineOfSight = tempLineOfSight;
                             distance = newDistance;
                             closest = Main.projectile[i];
                         }
@@ -100,7 +115,7 @@ namespace KawaggyMod.Core.Helpers
                 }
             }
 
-            return (closest, distance);
+            return new ProjectileData(closest, distance, lineOfSight);
         }
     }
 }

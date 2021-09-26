@@ -14,6 +14,8 @@ namespace KawaggyMod.Core
 
             cloudSummon = new CloudSummonCustomization();
             cloudSummon.Load();
+
+            KawaggyMod.Instance.Logger.Info("If you get many wrong format lines, delete the .txt's so that they get newly generated.");
         }
 
         public static void Unload()

@@ -1,4 +1,5 @@
 using KawaggyMod.Core;
+using KawaggyMod.Core.Net;
 using System.IO;
 using Terraria;
 using Terraria.ModLoader;
@@ -41,6 +42,11 @@ namespace KawaggyMod
             ModCompatibilityManager.Unload();
             SavePath = null;
             Instance = null;
+        }
+
+        public override void HandlePacket(BinaryReader reader, int whoAmI)
+        {
+            NetHandler.HandlePacket(reader, whoAmI);
         }
     }
 }
