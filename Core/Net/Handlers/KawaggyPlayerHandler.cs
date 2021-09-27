@@ -11,7 +11,7 @@ namespace KawaggyMod.Core.Net.Handlers
     {
         public enum MessageType : byte
         {
-            SyncOldJump,
+            SyncOldJumpAndRotation,
         }
 
         public KawaggyPlayerHandler() : base(HandlerType.KawaggyPlayerHandler) { }
@@ -22,8 +22,8 @@ namespace KawaggyMod.Core.Net.Handlers
 
             switch(message)
             {
-                case MessageType.SyncOldJump:
-                    ReceiveOldJump(reader);
+                case MessageType.SyncOldJumpAndRotation:
+                    ReceiveOldJumpAndRotation(reader);
                     break;
 
                 default:
@@ -32,24 +32,30 @@ namespace KawaggyMod.Core.Net.Handlers
             }
         }
 
-        public void SendOldJump(int toWho, int fromWho, int player)
+        public void SendOldJumpAndRotation(int toWho, int fromWho, int player)
         {
-            ModPacket packet = GetPacket((byte)MessageType.SyncOldJump, fromWho);
+            ModPacket packet = GetPacket((byte)MessageType.SyncOldJumpAndRotation);
+
             packet.Write((byte)player);
+
             KawaggyPlayer kawaggyPlayer = Main.player[player].Kawaggy();
             packet.Write(kawaggyPlayer.oldJump);
+            packet.Write(kawaggyPlayer.rotation);
+
             packet.Send(toWho, fromWho);
         }
 
-        public void ReceiveOldJump(BinaryReader reader)
+        public void ReceiveOldJumpAndRotation(BinaryReader reader)
         {
             byte player = reader.ReadByte();
+
             KawaggyPlayer kawaggyPlayer = Main.player[player].Kawaggy();
             kawaggyPlayer.oldJump = reader.ReadBoolean();
+            kawaggyPlayer.rotation = reader.ReadSingle();
 
             if (Main.netMode == NetmodeID.Server)
             {
-                SendOldJump(-1, player, player);
+                SendOldJumpAndRotation(-1, player, player);
             }
         }
     }

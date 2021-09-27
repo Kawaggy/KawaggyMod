@@ -93,22 +93,25 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
             projectile.TeleportIfTooFarFrom(player.Center, 1800f);
 
             projectile.velocity *= 0.96f;
+            (int myCount, int fullCount) = projectile.CountSameAsSelf(true);
+            Vector2 idlePosition = player.Center + new Vector2(0, -120).RotatedBy((MathHelper.TwoPi / fullCount) * (myCount));
+            
+            NPCData closestNPC = projectile.FindClosest<NPC>(delegate (NPC npc) { return npc.lifeMax > 5 && !npc.friendly && npc.CanBeChasedBy(); });
 
-            Vector2 idlePosition = player.Center + new Vector2(0, -120).RotatedBy((MathHelper.TwoPi / projectile.CountSameAsSelf(true)) * (projectile.minionPos + 1));
-            /*
-            bool flying = false;
-            bool allJumpsDepleted = !player.jumpAgainBlizzard && !player.jumpAgainCloud && !player.jumpAgainFart && !player.jumpAgainSail && !player.jumpAgainSandstorm && !player.jumpAgainUnicorn;
-
-            if (player.wingsLogic > 0 && player.controlJump && player.wingTime > 0f && !player.jumpAgainCloud && player.jump == 0 && player.velocity.Y != 0f)
-                flying = true;
-
-            if ((player.wingsLogic == 22 || player.wingsLogic == 28 || player.wingsLogic == 30 || player.wingsLogic == 32 || player.wingsLogic == 29 || player.wingsLogic == 33 || player.wingsLogic == 35 || player.wingsLogic == 37) && player.controlJump && player.controlDown && player.wingTime > 0f)
-                flying = true;
-
-            if (player.rocketTime != 0)
-                flying = true;
-            */
-            NPCData closestNPC = projectile.FindClosest<NPC>(delegate (NPC npc) { return npc.life > 5 && !npc.friendly && npc.CanBeChasedBy(); }, true);
+            bool selected = false;
+            if (player.HasMinionAttackTargetNPC)
+            {
+                if (Main.npc[player.MinionAttackTargetNPC].active)
+                {
+                    if (Main.npc[player.MinionAttackTargetNPC].Distance(projectile.Center) < 800f)
+                    {
+                        selected = true;
+                        closestNPC.npc = Main.npc[player.MinionAttackTargetNPC];
+                        closestNPC.distance = Main.npc[player.MinionAttackTargetNPC].Distance(projectile.Center);
+                        closestNPC.hasLineOfSight = Collision.CanHitLine(projectile.position, projectile.width, projectile.height, closestNPC.npc.position, closestNPC.npc.width, closestNPC.npc.height); ;
+                    }
+                }
+            }
 
             if (player.AllMobilityDepleted() && !player.mount.Active && player.jump <= 0 && closestNPC.distance > 500f)
             {
@@ -122,23 +125,32 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
             if (player.velocity.Y == 0)
                 projectile.ai[0] = 0;
 
-            if (closestNPC.distance <= 500f)
+            if (closestNPC.distance <= 500f && !selected)
+            {
                 projectile.ai[0] = 2;
+            }
+            else if(closestNPC.distance <= 800f && selected)
+            {
+                projectile.ai[0] = 2;
+            }
 
             switch (projectile.ai[0])
             {
                 case 0: //idle
                     projectile.ai[1] = 0;
-                    projectile.SmoothRotate(projectile.velocity.X * 0.2f, 0.2f);
+                    projectile.SmoothRotate(projectile.velocity.X * 0.2f);
                     Move(idlePosition);
                     break;
 
                 case 1: //for jumping!
+                    projectile.localAI[0] = 0;
                     if (projectile.ai[1] == 0)
                     {
                         if (player.Summons().currentCloudJump == -1)
                         {
                             player.Summons().currentCloudJump = projectile.whoAmI;
+                            projectile.netUpdate = true;
+                            projectile.ai[1] = 1;
                         }
                     }
                     
@@ -169,13 +181,30 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
                     }
                     else
                     {
-                        projectile.SmoothRotate(projectile.velocity.X * 0.2f, 0.2f);
+                        projectile.SmoothRotate(projectile.velocity.X * 0.2f);
                         Move(idlePosition);
                     }
                     break;
 
                 case 2: //npc attacking
+                    Vector2 vectorToNPC = closestNPC.npc.Center + new Vector2(0, -120).RotatedBy(((MathHelper.TwoPi / fullCount) * myCount) + player.Kawaggy().rotation);
+                    Vector2 directionToNPC = closestNPC.npc.Center - projectile.Center;
 
+                    Move(vectorToNPC);
+
+                    projectile.SmoothRotate(directionToNPC.ToRotation() - MathHelper.PiOver2);
+                    directionToNPC.Normalize();
+                    if (++projectile.ai[1] >= 60)
+                    {
+                        projectile.ai[1] = Main.rand.Next(-60, 1);
+
+                        Projectile rainDrop = Projectile.NewProjectileDirect(projectile.Center, directionToNPC * 6f, ModContent.ProjectileType<RainDrop>(), projectile.damage, projectile.knockBack, projectile.owner, ProjectileHelper.gravity, 0.98f);
+                        (rainDrop.modProjectile as RainDrop).rainType = RainDrop.water;
+
+                        rainDrop.netUpdate = true;
+
+                        projectile.netUpdate = true;
+                    }
                     break;
             }
 

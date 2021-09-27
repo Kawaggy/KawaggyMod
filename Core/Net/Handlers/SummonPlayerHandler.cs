@@ -11,7 +11,7 @@ namespace KawaggyMod.Core.Net.Handlers
     {
         public enum MessageType : byte
         {
-            SyncCloud,
+            SyncCloud
         }
 
         public SummonPlayerHandler() : base(HandlerType.SummonPlayerHandler) { }
@@ -34,24 +34,27 @@ namespace KawaggyMod.Core.Net.Handlers
 
         public void SendCloud(int toWho, int fromWho, int player)
         {
-            ModPacket packet = GetPacket((byte)MessageType.SyncCloud, fromWho);
+            ModPacket packet = GetPacket((byte)MessageType.SyncCloud);
+
             packet.Write((byte)player);
+
             SummonPlayer summonPlayer = Main.player[player].Summons();
+
             packet.Write(summonPlayer.jumpAgainCloudCounter);
             packet.Write(summonPlayer.currentCloudJump);
             packet.Send(toWho, fromWho);
         }
 
-        public void ReceiveCloud(BinaryReader reader)
+        internal void ReceiveCloud(BinaryReader reader)
         {
             byte player = reader.ReadByte();
+
             Main.player[player].Summons().jumpAgainCloudCounter = reader.ReadInt32();
             Main.player[player].Summons().currentCloudJump = reader.ReadInt32();
 
             if (Main.netMode == NetmodeID.Server)
             {
                 SendCloud(-1, player, player);
-                return;
             }
         }
     }

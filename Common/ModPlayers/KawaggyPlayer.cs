@@ -1,4 +1,5 @@
 ﻿using KawaggyMod.Core.Net;
+using Microsoft.Xna.Framework;
 using Terraria.ModLoader;
 
 namespace KawaggyMod.Common.ModPlayers
@@ -7,15 +8,19 @@ namespace KawaggyMod.Common.ModPlayers
     public class KawaggyPlayer : ModPlayer
     {
         public bool oldJump;
+        public float rotation;
 
         public override void Initialize()
         {
             oldJump = false;
+            rotation = 0f;
         }
 
         public override void PostUpdateMiscEffects()
         {
             oldJump = player.releaseJump;
+            rotation += MathHelper.TwoPi / 480;
+            rotation = MathHelper.WrapAngle(rotation);
         }
 
         public override void clientClone(ModPlayer clientClone)
@@ -23,11 +28,12 @@ namespace KawaggyMod.Common.ModPlayers
             KawaggyPlayer clone = clientClone as KawaggyPlayer;
 
             clone.oldJump = oldJump;
+            clone.rotation = rotation;
         }
 
         public override void SyncPlayer(int toWho, int fromWho, bool newPlayer)
         {
-            NetHandler.PlayerHandlers.playerHandler.SendOldJump(toWho, fromWho, player.whoAmI);
+            NetHandler.PlayerHandlers.playerHandler.SendOldJumpAndRotation(toWho, fromWho, player.whoAmI);
         }
 
         public override void SendClientChanges(ModPlayer clientPlayer)
@@ -35,7 +41,9 @@ namespace KawaggyMod.Common.ModPlayers
             KawaggyPlayer clone = clientPlayer as KawaggyPlayer;
 
             if (clone.oldJump != oldJump)
-                NetHandler.PlayerHandlers.playerHandler.SendOldJump(-1, -1, player.whoAmI);
+            {
+                NetHandler.PlayerHandlers.playerHandler.SendOldJumpAndRotation(-1, -1, player.whoAmI);
+            }
         }
     }
 }

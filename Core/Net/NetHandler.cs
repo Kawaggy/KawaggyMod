@@ -24,6 +24,10 @@ namespace KawaggyMod.Core.Net
                 case HandlerType.SummonPlayerHandler:
                     PlayerHandlers.summonHandler.HandlePacket(reader, fromWho);
                     break;
+
+                default:
+                    KawaggyMod.Instance.Logger.WarnFormat("No handler found of id {0}!", (byte)handlerType);
+                    break;
             }
         }
     }

@@ -16,17 +16,12 @@ namespace KawaggyMod.Core.Net.Handlers
 
         public abstract void HandlePacket(BinaryReader reader, int fromWho);
 
-        protected ModPacket GetPacket(byte messageType, int fromWho)
+        protected ModPacket GetPacket(byte messageType)
         {
             var packet = KawaggyMod.Instance.GetPacket();
             packet.Write((byte)Type);
             packet.Write(messageType);
-            /*
-            if (Main.netMode == NetmodeID.Server)
-            {
-                packet.Write((byte)fromWho);
-            }
-            */
+
             return packet;
         }
 

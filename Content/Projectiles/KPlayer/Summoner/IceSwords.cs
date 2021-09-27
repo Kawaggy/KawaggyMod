@@ -107,7 +107,8 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
 
             projectile.hide = false;
 
-            float XOffset = (projectile.minionPos % 2 == 0 ? 1 : -1) * 20 * (projectile.minionPos + 1) * player.direction * -1;
+            (int myCount, int _) = projectile.CountSameAsSelf(true);
+            float XOffset = ((myCount - 1) % 2 == 0 ? 1 : -1) * 20 * myCount * player.direction * -1;
             Vector2 idlePosition = player.Center + new Vector2(XOffset, -100);
 
             switch (projectile.ai[0])
@@ -162,7 +163,7 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
                     {
                         projectile.localAI[0] = 0;
                         float forRotation = projectile.position.X - projectile.oldPosition.X;
-                        projectile.SmoothRotate(MathHelper.Clamp(forRotation, -2.75f, 2.75f) * 0.2f, 0.2f);
+                        projectile.SmoothRotate(MathHelper.Clamp(forRotation, -2.75f, 2.75f) * 0.2f);
                         Move(idlePosition);
                     }
 
@@ -249,7 +250,7 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
                         }
 
                         float forRotation = projectile.position.X - projectile.oldPosition.X;
-                        projectile.SmoothRotate(MathHelper.Clamp(forRotation, -2.75f, 2.75f) * 0.2f, 0.2f);
+                        projectile.SmoothRotate(MathHelper.Clamp(forRotation, -2.75f, 2.75f) * 0.2f);
                         Move(idlePosition);
                     }
 
@@ -279,12 +280,12 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
                                 projectile.netUpdate = true;
                             }
                             //move out a little
-                            projectile.SmoothRotate((Main.npc[target].Center - projectile.Center).ToRotation() - MathHelper.PiOver2, 0.2f);
+                            projectile.SmoothRotate((Main.npc[target].Center - projectile.Center).ToRotation() - MathHelper.PiOver2);
                             Move(Main.npc[target].Center + random + new Vector2(0, projectile.ai[1]).RotatedBy(projectile.rotation));
                         }
                         else if (projectile.ai[1] > 0) //idle around the npc
                         {
-                            projectile.SmoothRotate((Main.npc[target].Center - projectile.Center).ToRotation() - MathHelper.PiOver2, 0.2f);
+                            projectile.SmoothRotate((Main.npc[target].Center - projectile.Center).ToRotation() - MathHelper.PiOver2);
                             Move(Main.npc[target].Center + random);
                         }
                     }
@@ -328,6 +329,24 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
         public override bool MinionContactDamage()
         {
             return true;
+        }
+
+        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        {
+            if (target.HasBuff(BuffID.Wet))
+            {
+                target.DelBuff(target.FindBuffIndex(BuffID.Wet));
+                target.AddBuff(BuffID.Frostburn, 180);
+            }
+        }
+
+        public override void OnHitPvp(Player target, int damage, bool crit)
+        {
+            if (target.HasBuff(BuffID.Wet))
+            {
+                target.DelBuff(target.FindBuffIndex(BuffID.Wet));
+                target.AddBuff(BuffID.Frostburn, 180);
+            }
         }
 
         internal void Move(Vector2 position)

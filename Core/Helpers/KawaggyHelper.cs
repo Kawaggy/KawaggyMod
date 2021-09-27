@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KawaggyMod.Core.Helpers
+﻿namespace KawaggyMod.Core.Helpers
 {
     public static partial class KawaggyHelper
     {
