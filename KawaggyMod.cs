@@ -25,6 +25,7 @@ namespace KawaggyMod
                 CustomizationManager.Load();
                 Shaders.Load(this);
                 ReadMe.GenerateOrUpdate(this);
+                ChangeLog.GenerateOrUpdate(this);
             }
         }
 

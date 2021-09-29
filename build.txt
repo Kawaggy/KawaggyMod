@@ -1,6 +1,6 @@
 displayName = Kawaggy's Mod
 author = Kawaggy, Yharex87
-version = 1.0.0.0
+version = 0.0.0.1
 buildIgnore = build.txt, .gitattributes, .gitignore, .git/, .vs/, .idea/, bin/, obj/, Thumbs.db, LICENSE, README.mb
 hideCode = false
 hideResources = false

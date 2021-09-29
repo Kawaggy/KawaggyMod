@@ -1,12 +1,17 @@
-Kawaggy's Mod currently adds:
+Kawaggy's Mod is a generic content mod that expands content on various parts of the game.
+Currently most content is added in Pre-Hardmode.
+
+See the READ_ME and the ChangeLog, after you once loaded Kawaggy's Mod, in your ModLoader/ModSpecificData/KawaggyMod folder for info on how to customize things and what content got added in the most recent update.
+If you want to re-generate these, simply delete the .txts and reload Kawaggy's Mod.
+If your sprites aren't added properly to the customizable things, make sure to read your log file for info.
 
 Coders: Kawaggy.
 Spriters: Yharex87, Kawaggy.
-Ideas: Kawaggy, Yharex87, AliciaFox.
+Ideas: Yharex87, AliciaFox, Kawaggy.
 
 How to contact them (Discord tags):
   - Kawaggy: Kawaggy#0290
   - AliciaFox: Awi#5229
-  - Yharex87: Yharex87#6681
+  - Yharex87: Ace of Hearts#4602
 
 This mods' Discord: https://discord.gg/eJUJ5y7

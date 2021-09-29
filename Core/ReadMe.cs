@@ -56,7 +56,7 @@ namespace KawaggyMod.Core
 
             if (!File.Exists(thePath))
             {
-                mod.Logger.Info("READ_ME did not exist!");
+                mod.Logger.Info("READ_ME did not exist! Generating...");
                 File.WriteAllLines(thePath, lines);
             }
             else
