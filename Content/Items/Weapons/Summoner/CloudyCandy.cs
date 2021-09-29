@@ -23,7 +23,7 @@ namespace KawaggyMod.Content.Items.Weapons.Summoner
         {
             item.width = 18;
             item.height = 18;
-            item.damage = 14;
+            item.damage = 9;
             item.knockBack = 3f;
             item.mana = 10;
             item.useTime = 36;

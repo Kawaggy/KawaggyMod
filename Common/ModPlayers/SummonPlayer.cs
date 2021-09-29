@@ -1,4 +1,5 @@
 ﻿using KawaggyMod.Core.Net;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace KawaggyMod.Common.ModPlayers
@@ -45,6 +46,31 @@ namespace KawaggyMod.Common.ModPlayers
             if (clone.currentCloudJump != currentCloudJump)
             {
                 NetHandler.PlayerHandlers.summonHandler.SendCloud(-1, -1, player.whoAmI);
+            }
+        }
+
+        public override void ModifyWeaponDamage(Item item, ref float add, ref float mult, ref float flat)
+        {
+            bool playerHasSummonOut = false;
+            for (int i = 0; i < Main.maxProjectiles; i++)
+            {
+                Projectile projectile = Main.projectile[i];
+                if (projectile.active && projectile.owner == player.whoAmI)
+                {
+                    if (projectile.minion && projectile.minionSlots > 0)
+                    {
+                        playerHasSummonOut = true;
+                        break;
+                    }
+                }
+            }
+
+            if (playerHasSummonOut)
+            {
+                if (!item.summon && !item.sentry)
+                {
+                    mult *= 0.85f;
+                }
             }
         }
     }
