@@ -17,13 +17,14 @@ namespace KawaggyMod.Core
                 "This update expands content, for the most part, in the Pre-hardmode area of the game.",
                 "",
                 "Additions:",
-                " - Cracked Ice Orb (summon weapon)",
-                " - Cloudy Candy (summon weapon)",
+                " - Chilling Shard, a material and a bullet",
+                " - Cracked Ice Orb, a summon weapon",
+                " - Cloudy Candy, a summon weapon",
                 " - Burning Blood Dye",
                 " - Death Whisper Dye",
                 "",
                 "Game Changes: ",
-                " - When a summon is active the players' damage on other weapons is reduced by 25%",
+                " - When a summon is active the players' damage on other weapons is reduced by 25% in pre-hardmode, 50% in hardmode and 75% in post-moonlord",
             };
 
             if (!File.Exists(thePath))

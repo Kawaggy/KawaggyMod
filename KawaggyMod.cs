@@ -34,6 +34,21 @@ namespace KawaggyMod
             ModCompatibilityManager.Load();
         }
 
+        public override void AddRecipeGroups()
+        {
+            RecipeManager.AddRecipeGroups(this);
+        }
+
+        public override void AddRecipes()
+        {
+            RecipeManager.AddRecipes(this);
+        }
+
+        public override void PostAddRecipes()
+        {
+            RecipeManager.EditRecipes(this);
+        }
+
         public override void Unload()
         {
             if (!Main.dedServ)

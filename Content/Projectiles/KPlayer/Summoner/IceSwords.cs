@@ -152,6 +152,10 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
                                 {
                                     Dust.NewDust(projectile.Center + new Vector2(0, 20).RotatedBy(projectile.rotation), 4, 4, DustID.Ice, Main.rand.Next(-3, 4), Main.rand.Next(-3, 4));
                                 }
+                                for (int x = 0; x < 3; x++)
+                                {
+                                    //figure out how to get dust from the tile
+                                }
                             }
 
                             projectile.velocity.X *= 0.75f;

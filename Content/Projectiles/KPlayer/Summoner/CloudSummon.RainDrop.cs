@@ -23,7 +23,6 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
             projectile.aiStyle = -1;
             projectile.friendly = true;
             projectile.penetrate = 2;
-            projectile.tileCollide = true;
             projectile.usesLocalNPCImmunity = true;
             projectile.localNPCHitCooldown = 15;
             projectile.timeLeft = 180;

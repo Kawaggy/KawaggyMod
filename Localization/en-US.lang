@@ -1,18 +1,33 @@
-tMod wiki said first line has bug so it is recomended to make the first line not a localization thing
+#tMod wiki said first line has bug so it is recomended to make the first line not a localization thing
 Common.AmountOfExtraSprites=Amount of extra sprites: {0}
 Common.DeveloperMale=Developer
 Common.DeveloperFemale=Developer
-
+Common.CopperBar=Copper Tier Bar
+Common.WorldEvilChunk=World Evil Chunk
 
 #Items
 ItemName.CrackedIceOrb=Cracked Ice Orb
 ItemTooltip.CrackedIceOrb=Summons a magical flying Ice Sword to protect you
 
+ItemName.CloudyCandy=Cloudy Candy
+ItemTooltip.CloudyCandy=Summons a small cute cloud to protect you
 
-#Projectile
+ItemName.ChillingShard=Chilling Shard
+ItemTooltip.ChillingShard='Cold to the touch'
+
+ItemName.MahoganyAmulet=Mahogany Amulet
+ItemTooltip.MahoganyAmulet=Increases your max number of minions\nReduces summon damage slightly\nReduces health slightly
+
+
+#Projectiles
 ProjectileName.IceSwords=Ice Sword
 
+ProjectileName.CloudSummon=Cloud
 
-#Buff
+
+#Buffs
 BuffName.IceSwordsBuff=Ice Sword Buff
 BuffDescription.IceSwordsBuff=Magical Ice Swords are here to protect you!
+
+BuffName.CloudSummonBuff=Cloud Summon Buff
+BuffDescription.CloudSummonBuff=Cute Clouds are here to protect you!

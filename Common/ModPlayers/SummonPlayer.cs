@@ -69,7 +69,23 @@ namespace KawaggyMod.Common.ModPlayers
             {
                 if (!item.summon && !item.sentry)
                 {
-                    mult *= 0.85f;
+                    if (!Main.hardMode)
+                    {
+                        mult *= 0.85f;
+                        return;
+                    }
+
+                    if (NPC.downedMoonlord)
+                    {
+                        mult *= 0.25f;
+                        return;
+                    }
+
+                    if (Main.hardMode)
+                    {
+                        mult *= 0.5f;
+                        return;
+                    }
                 }
             }
         }

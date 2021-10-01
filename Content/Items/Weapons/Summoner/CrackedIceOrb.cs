@@ -1,4 +1,5 @@
 ﻿using KawaggyMod.Content.Buffs.Summoner;
+using KawaggyMod.Content.Items.Miscellaneous;
 using KawaggyMod.Content.Projectiles.KPlayer.Summoner;
 using KawaggyMod.Core;
 using KawaggyMod.Core.Interfaces;
@@ -40,9 +41,12 @@ namespace KawaggyMod.Content.Items.Weapons.Summoner
         public override void AddRecipes()
         {
             ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ItemID.IceBlade);
-            recipe.AddIngredient(ItemID.Shiverthorn, 5);
+            recipe.AddIngredient(ModContent.ItemType<ChillingShard>(), 30);
+            recipe.AddIngredient(ItemID.FallenStar, 5);
             recipe.AddIngredient(ItemID.Bone, 5);
+            recipe.AddTile(TileID.Anvils);
+            recipe.SetResult(this);
+            recipe.AddRecipe();
         }
 
         public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)

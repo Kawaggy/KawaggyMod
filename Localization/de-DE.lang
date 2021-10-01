@@ -1,18 +1,31 @@
-tMod wiki said first line has bug so it is recomended to make the first line not a localization thing
-Common.AmountOfExtraSprites=Anzahl zus�tzlicher Sprites: {0}
+#tMod wiki said first line has bug so it is recomended to make the first line not a localization thing
+Common.AmountOfExtraSprites=Anzahl zusätzlicher Sprites: {0}
 Common.DeveloperMale=Entwickler
 Common.DeveloperFemale=Entwicklerin
-
+Common.CopperBar=Kupferstufenbarren
+Common.WorldEvilChunk=Welt böser Brocken
 
 #Items
 ItemName.CrackedIceOrb=Gebrochene Eiskugel
-ItemTooltip.CrackedIceOrb=Beschw�rt ein magisches fliegendes Eisschwert um dich zu besch�tzen
+ItemTooltip.CrackedIceOrb=Beschwört ein magisches fliegendes Eisschwert um dich zu beschützen
+
+ItemName.CloudyCandy=Bewölktes Süssigkeit
+ItemTooltip.CloudyCandy=Beschwört eine kleine süsse Wolke um dich zu beschützen
+
+ItemName.ChillingShard=Kühle Scherbe
+ItemTooltip.ChillingShard='Kalt, kalt kalt!'
 
 
 #Projectiles
 ProjectileName.IceSwords=Eisschwert
 
+ProjectileName.CloudSummon=Wolke
+
 
 #Buffs
-BuffName.IceSwordsBuff=Eisschwert-Buff
-BuffDescription.IceSwordsBuff=Magische Eisschwerter sind hier um dich zu besch�tzen!
+BuffName.IceSwordsBuff=Eisschwerte
+BuffDescription.IceSwordsBuff=Magische Eisschwerter sind hier um dich zu beschützen!
+
+BuffName.CloudSummonBuff=Wolkenbeschwörung
+BuffDescription.CloudSummonBuff=Niedliche Wolken sind hier um dich zu beschützen!
+

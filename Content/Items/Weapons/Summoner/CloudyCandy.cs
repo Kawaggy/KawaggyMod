@@ -30,7 +30,7 @@ namespace KawaggyMod.Content.Items.Weapons.Summoner
             item.useAnimation = 36;
             item.useStyle = ItemUseStyleID.SwingThrow;
             item.value = Item.buyPrice(silver: 40);
-            item.rare = ItemRarityID.Cyan;
+            item.rare = ItemRarityID.Blue;
             item.UseSound = SoundID.Item44;
             item.noMelee = true;
             item.summon = true;
@@ -41,9 +41,12 @@ namespace KawaggyMod.Content.Items.Weapons.Summoner
         public override void AddRecipes()
         {
             ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ItemID.IceBlade);
-            recipe.AddIngredient(ItemID.Shiverthorn, 5);
-            recipe.AddIngredient(ItemID.Bone, 5);
+            recipe.AddIngredient(ItemID.Cloud, 15);
+            recipe.AddIngredient(ItemID.FallenStar);
+            recipe.AddRecipeGroup(RecipeManager.AnyWood, 2);
+            recipe.AddTile(TileID.Anvils);
+            recipe.SetResult(this);
+            recipe.AddRecipe();
         }
 
         public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
