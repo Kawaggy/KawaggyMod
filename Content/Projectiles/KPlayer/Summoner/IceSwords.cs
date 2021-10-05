@@ -154,7 +154,7 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
                                 }
                                 for (int x = 0; x < 3; x++)
                                 {
-                                    //figure out how to get dust from the tile
+                                    WorldGen.KillTile(i, j, true, true);
                                 }
                             }
 

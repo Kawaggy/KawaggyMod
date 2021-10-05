@@ -55,10 +55,6 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Ranger
                 target.DelBuff(target.FindBuffIndex(BuffID.Wet));
                 target.AddBuff(BuffID.Frostburn, 90);
             }
-            else if (!target.HasBuff(BuffID.Frostburn))
-            {
-                target.AddBuff(BuffID.Wet, 90);
-            }
             AddDust();
         }
 
@@ -68,10 +64,6 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Ranger
             {
                 target.DelBuff(target.FindBuffIndex(BuffID.Wet));
                 target.AddBuff(BuffID.Frostburn, 90);
-            }
-            else if (!target.HasBuff(BuffID.Frostburn))
-            {
-                target.AddBuff(BuffID.Wet, 90);
             }
             AddDust();
         }

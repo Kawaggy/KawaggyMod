@@ -30,7 +30,7 @@ namespace KawaggyMod.Content.Items.Weapons.Summoner
             item.useAnimation = 36;
             item.useStyle = ItemUseStyleID.SwingThrow;
             item.value = Item.buyPrice(silver: 40);
-            item.rare = ItemRarityID.Cyan;
+            item.rare = ItemRarityID.Orange;
             item.UseSound = SoundID.Item44;
             item.noMelee = true;
             item.summon = true;
