@@ -9,8 +9,8 @@ namespace KawaggyMod.Content.Items.Weapons.Magic
     {
         public override void SetDefaults()
         {
-            item.width = 40;
-            item.height = 46;
+            item.width = 22;
+            item.height = 26;
             item.damage = 32;
             item.useTime = 15;
             item.useAnimation = 15;
