@@ -20,10 +20,11 @@ namespace KawaggyMod.Core
                 " - Chilling Shard, a material and a bullet",
                 " - Cracked Ice Orb, a summon weapon",
                 " - Cloudy Candy, a summon weapon",
+                " - Icy Book, a magic weapon",
                 " - Burning Blood Dye",
                 " - Death Whisper Dye",
                 "",
-                "Game Changes: ",
+                "Vanilla Changes: ",
                 " - When a summon is active the players' damage on other weapons is reduced by 25% in pre-hardmode, 50% in hardmode and 75% in post-moonlord",
             };
 

@@ -1,7 +1,5 @@
 ﻿using KawaggyMod.Content.Items.Miscellaneous.Dyes;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria;
-using Terraria.Graphics.Shaders;
+using KawaggyMod.Core.Helpers;
 using Terraria.ModLoader;
 
 namespace KawaggyMod.Core
@@ -10,11 +8,8 @@ namespace KawaggyMod.Core
     {
         public static void Load(Mod mod)
         {
-            GameShaders.Misc["BurningBlood"] = new MiscShaderData(new Ref<Effect>(mod.GetEffect("Effects/BurningBlood")), "BurningBloodPass");
-            GameShaders.Misc["DeathWhisper"] = new MiscShaderData(new Ref<Effect>(mod.GetEffect("Effects/DeathWhisper")), "DeathWhisperPass");
-
-            GameShaders.Armor.BindShader(ModContent.ItemType<BurningBloodDye>(), new ArmorShaderData(new Ref<Effect>(mod.GetEffect("Effects/BurningBlood")), "BurningBloodPass"));
-            GameShaders.Armor.BindShader(ModContent.ItemType<DeathWhisperDye>(), new ArmorShaderData(new Ref<Effect>(mod.GetEffect("Effects/DeathWhisper")), "DeathWhisperPass"));
+            KawaggyHelper.AddDye(ModContent.ItemType<BurningBloodDye>(), "BurningBlood", "BurningBloodPass");
+            KawaggyHelper.AddDye(ModContent.ItemType<DeathWhisperDye>(), "DeathWhisper", "DeathWhisperPass");
         }
     }
 }

@@ -41,9 +41,9 @@ namespace KawaggyMod.Content.Items.Weapons.Summoner
         public override void AddRecipes()
         {
             ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ModContent.ItemType<ChillingShard>(), 30);
             recipe.AddIngredient(ItemID.FallenStar, 5);
             recipe.AddIngredient(ItemID.Bone, 5);
+            recipe.AddIngredient(ModContent.ItemType<ChillingShard>(), 30);
             recipe.AddTile(TileID.Anvils);
             recipe.SetResult(this);
             recipe.AddRecipe();
