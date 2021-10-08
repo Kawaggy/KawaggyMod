@@ -4,6 +4,7 @@ Common.DeveloperMale=Entwickler
 Common.DeveloperFemale=Entwicklerin
 Common.CopperBar=Kupferstufenbarren
 Common.WorldEvilChunk=Welt böser Brocken
+Common.SwapWith=Rechtsklick zum Tauschen mit '{0}'!
 
 #Items
 ItemName.CrackedIceOrb=Gebrochene Eiskugel
@@ -16,7 +17,10 @@ ItemName.ChillingShard=Kühle Scherbe
 ItemTooltip.ChillingShard='Kalt, kalt kalt!'
 
 ItemName.MahoganyAmulet=Mahagoni Amulett
-ItemTooltip.MahoganyAmulet=Increases your max number of minions\nReduces summon damage slightly\nReduces health slightly
+ItemTooltip.MahoganyAmulet=Erhöht deine maximale Anzahl von Beschwörungen\nReduziert Beschwörungsschaden leicht\nReduziert die Gesundheit leicht
+
+ItemName.SniperBullet=Scharfschützenkugel
+ItemTooltip.SniperBullet=Erhöht den Fernkampfschaden leicht
 
 
 #Projectiles

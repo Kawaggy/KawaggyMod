@@ -4,6 +4,7 @@ Common.DeveloperMale=Developer
 Common.DeveloperFemale=Developer
 Common.CopperBar=Copper Tier Bar
 Common.WorldEvilChunk=World Evil Chunk
+Common.SwapWith=Right click to swap with '{0}'!
 
 #Items
 ItemName.CrackedIceOrb=Cracked Ice Orb
@@ -18,6 +19,20 @@ ItemTooltip.ChillingShard='Cold to the touch'
 ItemName.MahoganyAmulet=Mahogany Amulet
 ItemTooltip.MahoganyAmulet=Increases your max number of minions\nReduces summon damage slightly\nReduces health slightly
 
+ItemName.SniperBullet=Sniper Bullet
+ItemTooltip.SniperBullet=Increases ranged damage slightly
+
+ItemName.SniperBullet_GoldCopper={$Mods.KawaggyMod.ItemName.SniperBullet}
+ItemTooltip.SniperBullet_GoldCopper={$Mods.KawaggyMod.ItemTooltip.SniperBullet}
+
+ItemName.SniperBullet_GoldTin={$Mods.KawaggyMod.ItemName.SniperBullet}
+ItemTooltip.SniperBullet_GoldTin={$Mods.KawaggyMod.ItemTooltip.SniperBullet}
+
+ItemName.SniperBullet_PlatinumCopper={$Mods.KawaggyMod.ItemName.SniperBullet}
+ItemTooltip.SniperBullet_PlatinumCopper={$Mods.KawaggyMod.ItemTooltip.SniperBullet}
+
+ItemName.SniperBullet_PlatinumTin={$Mods.KawaggyMod.ItemName.SniperBullet}
+ItemTooltip.SniperBullet_PlatinumTin={$Mods.KawaggyMod.ItemTooltip.SniperBullet}
 
 #Projectiles
 ProjectileName.IceSwords=Ice Sword

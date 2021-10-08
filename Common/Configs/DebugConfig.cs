@@ -10,5 +10,9 @@ namespace KawaggyMod.Common.Configs
         [Label("Show an extra tooltip to know custom sprite count")]
         [DefaultValue(false)]
         public bool ShowExtraSpritesCount;
+
+        [Label("Show an extra tooltip to know some extra info on items")]
+        [DefaultValue(false)]
+        public bool ShowExtraInfo;
     }
 }
