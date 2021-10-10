@@ -2,8 +2,10 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.GameInput;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.ID;
 
 namespace KawaggyMod.Core.ModTypes
 {
@@ -76,22 +78,34 @@ namespace KawaggyMod.Core.ModTypes
 				if (Main.LocalPlayer.armor[i].type == item.type) return false;
 			}
 
-			if (FindOtherAccessory().item != null)
+			(int index, Item accessory) = FindOtherAccessory();
+			if (accessory != null)
 			{
-				return true;
+				int slot = -1;
+				for (int i = 0; i < 10; i++)
+				{
+					for (int j = 0; j < 5; j++)
+					{
+						int num3 = (int)(20f + (float)(i * 56) * Main.inventoryScale);
+						int num4 = (int)(20f + (float)(j * 56) * Main.inventoryScale);
+						if (Main.mouseX >= num3 && (float)Main.mouseX <= (float)num3 + (float)Main.inventoryBackTexture.Width * Main.inventoryScale && Main.mouseY >= num4 && (float)Main.mouseY <= (float)num4 + (float)Main.inventoryBackTexture.Height * Main.inventoryScale && !PlayerInput.IgnoreMouseInterface)
+						{
+							slot = i + j * 10;
+						}
+					}
+				}
+
+				if (Main.mouseRight && Main.mouseRightRelease)
+                {
+					Utils.Swap(ref Main.LocalPlayer.inventory[slot], ref Main.LocalPlayer.armor[index]);
+					Main.PlaySound(SoundID.Grab);
+					Recipe.FindRecipes();
+				}
+
+				return false;
 			}
 			return base.CanRightClick();
 		}
-
-        public override void RightClick(Player player)
-        {
-			(int index, Item accessory) = FindOtherAccessory();
-			if (accessory != null)
-            {
-				Main.LocalPlayer.QuickSpawnClonedItem(accessory);
-				Main.LocalPlayer.armor[index] = item.Clone();
-            }
-        }
 
         public (int index, Item item) FindOtherAccessory()
         {
