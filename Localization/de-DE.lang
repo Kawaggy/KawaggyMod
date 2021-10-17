@@ -6,6 +6,9 @@ Common.CopperBar=Kupferstufenbarren
 Common.WorldEvilChunk=Welt böser Brocken
 Common.SwapWith=Rechtsklick zum Tauschen mit '{0}'!
 
+SadisticMode.Enabled=Sadistischer Modus aktiviert!
+SadisticMode.Disabled=Sadistischer Modus deaktiviert!
+
 #Items
 ItemName.CrackedIceOrb=Gebrochene Eiskugel
 ItemTooltip.CrackedIceOrb=Beschwört ein magisches fliegendes Eisschwert um dich zu beschützen
@@ -21,6 +24,9 @@ ItemTooltip.MahoganyAmulet=Erhöht deine maximale Anzahl von Beschwörungen\nRed
 
 ItemName.SniperBullet=Scharfschützenkugel
 ItemTooltip.SniperBullet=Erhöht den Fernkampfschaden leicht
+
+ItemName.SadistsPearl=Sadisten-Perle
+ItemTooltip.SadistsPearl='Sieht so aus, als hätte das jemand verloren...'\nVerlorenes Relikt das den Untergang hervorbringt
 
 
 #Projectiles

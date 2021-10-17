@@ -34,6 +34,10 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
             projectile.penetrate = -1;
             projectile.minionSlots = 1f;
             projectile.tileCollide = false;
+
+            wasUsedForJumping = false;
+            canJump = false;
+            canAttack = false;
         }
 
         public override bool MinionContactDamage()
@@ -93,7 +97,7 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
             SpawnDust();
         }
 
-        void SpawnDust()
+        internal void SpawnDust()
         {
             for (int i = 0; i < 8; i++)
             {
@@ -101,9 +105,9 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
             }
         }
 
-        public bool wasUsedForJumping = false;
-        public bool canJump = false;
-        public bool canAttack = false;
+        public bool wasUsedForJumping;
+        public bool canJump;
+        public bool canAttack;
         public override void AI()
         {
             Player player = Main.player[projectile.owner];
@@ -114,14 +118,7 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
             if (player.HasBuff(ModContent.BuffType<CloudSummonBuff>()))
                 projectile.timeLeft = 2;
 
-            projectile.frameCounter++;
-            if (projectile.frameCounter > 5)
-            {
-                projectile.frameCounter = 0;
-                projectile.frame++;
-                if (projectile.frame > Main.projFrames[projectile.type] - 1)
-                    projectile.frame = 0;
-            }
+            projectile.SimpleAnimation(animationSpeed: 5);
 
             projectile.TeleportIfTooFarFrom(player.Center, 1800f, SpawnDust);
 

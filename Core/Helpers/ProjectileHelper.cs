@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 
 namespace KawaggyMod.Core.Helpers
 {
@@ -50,6 +51,38 @@ namespace KawaggyMod.Core.Helpers
             }
 
             return (me, count);
+        }
+
+        public static int Count(int type)
+        {
+            int count = 0;
+            for (int i = 0; i < Main.maxProjectiles; i++)
+            {
+                Projectile projectile = Main.projectile[i];
+                if (projectile.active && projectile.type == type)
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        public static bool IsSummon(this Projectile projectile)
+        {
+            return projectile.minion || projectile.sentry || ProjectileID.Sets.MinionShot[projectile.type] || ProjectileID.Sets.SentryShot[projectile.type];
+        }
+
+        public static void SimpleAnimation(this Projectile projectile, int animationSpeed)
+        {
+            projectile.frameCounter++;
+            if (projectile.frameCounter > animationSpeed)
+            {
+                projectile.frame++;
+                projectile.frameCounter = 0;
+                if (projectile.frame > Main.projFrames[projectile.type] - 1)
+                    projectile.frame = 0;
+            }
         }
     }
 }

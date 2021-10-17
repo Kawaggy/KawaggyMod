@@ -32,5 +32,16 @@ namespace KawaggyMod.Core.Helpers
             }
             return false;
         }
+
+        public static void Move(this Entity entity, Vector2 desiredPosition, float minDistance, float speed, float inertia)
+        {
+            if (entity.DistanceSQ(desiredPosition) > minDistance * minDistance)
+            {
+                Vector2 velocity = desiredPosition - entity.Center;
+                velocity.Normalize();
+                velocity *= speed;
+                entity.velocity = (entity.velocity * (inertia - 1) + velocity) / inertia;
+            }
+        }
     }
 }

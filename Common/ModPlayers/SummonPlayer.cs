@@ -8,11 +8,13 @@ namespace KawaggyMod.Common.ModPlayers
     {
         public int jumpAgainCloudCounter;
         public int currentCloudJump;
-        
+
+        public bool spiritMarkedBracelet;
         public override void Initialize()
         {
             jumpAgainCloudCounter = 0;
             currentCloudJump = -1;
+            spiritMarkedBracelet = false;
         }
 
         public override void ResetEffects()
@@ -24,6 +26,8 @@ namespace KawaggyMod.Common.ModPlayers
             {
                 currentCloudJump = -1;
             }
+
+            spiritMarkedBracelet = false;
         }
 
         public override void clientClone(ModPlayer clientClone)

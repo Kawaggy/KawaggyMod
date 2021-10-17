@@ -1,3 +1,4 @@
+using KawaggyMod.Common.ModPlayers;
 using KawaggyMod.Core;
 using KawaggyMod.Core.Net;
 using System.IO;
@@ -56,6 +57,7 @@ namespace KawaggyMod
                 CustomizationManager.Unload();
             }
             ModCompatibilityManager.Unload();
+            PlayerEvents.Unload();
             SavePath = null;
             Instance = null;
         }

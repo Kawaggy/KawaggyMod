@@ -33,7 +33,7 @@ namespace KawaggyMod.Core.Helpers
 
         
         /// <returns>A dictionary containing every item type and its amount dropped</returns>
-        public static Dictionary<int, int> DropItem(this Entity entity, ItemDropInfo[] items)
+        public static Dictionary<int, int> DropItems(this Entity entity, ItemDropInfo[] items)
         {
             Dictionary<int, int> collection = new Dictionary<int, int>();
 
