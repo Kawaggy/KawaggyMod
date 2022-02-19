@@ -1,4 +1,5 @@
 ﻿using KawaggyMod.Core.Net.Handlers;
+using KawaggyMod.Core.Net.Handlers.PlayerHandlers;
 using System.IO;
 
 namespace KawaggyMod.Core.Net
@@ -13,7 +14,7 @@ namespace KawaggyMod.Core.Net
 
         public static void HandlePacket(BinaryReader reader, int fromWho)
         {
-            HandlerType handlerType = (HandlerType)reader.ReadByte();
+            HandlerType handlerType = (HandlerType)reader.ReadUInt32();
 
             switch(handlerType)
             {
@@ -26,7 +27,7 @@ namespace KawaggyMod.Core.Net
                     break;
 
                 default:
-                    KawaggyMod.Instance.Logger.WarnFormat("No handler found of id {0}!", (byte)handlerType);
+                    KawaggyMod.Instance.Logger.WarnFormat("No handler found of id {0}!", (uint)handlerType);
                     break;
             }
         }

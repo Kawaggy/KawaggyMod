@@ -23,11 +23,11 @@ namespace KawaggyMod
 
             if (!Main.dedServ)
             {
-                CustomizationManager.Load();
-                Shaders.Load(this);
-                ReadMe.GenerateOrUpdate(this);
-                ChangeLog.GenerateOrUpdate(this);
+                ServerLoad();
             }
+
+            Editing.ILEdits();
+            Editing.OnEdits();
         }
 
         public override void PostSetupContent()
@@ -65,6 +65,14 @@ namespace KawaggyMod
         public override void HandlePacket(BinaryReader reader, int whoAmI)
         {
             NetHandler.HandlePacket(reader, whoAmI);
+        }
+
+        private void ServerLoad()
+        {
+            CustomizationManager.Load();
+            Shaders.Load(this);
+            ReadMe.GenerateOrUpdate(this);
+            ChangeLog.GenerateOrUpdate(this);
         }
     }
 }

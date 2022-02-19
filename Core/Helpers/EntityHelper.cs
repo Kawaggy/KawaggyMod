@@ -1,4 +1,5 @@
 ﻿using KawaggyMod.Core.DataTypes;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 
@@ -116,6 +117,92 @@ namespace KawaggyMod.Core.Helpers
             }
 
             return new ProjectileData(closest, distance, lineOfSight);
+        }
+
+        /// <summary>
+        /// Resizes an entity to a new width and a new height
+        /// </summary>
+        /// <param name="entity">The entity to be resized</param>
+        /// <param name="newWidth">The new width</param>
+        /// <param name="newHeight">The new height</param>
+        public static void Resize(this Entity entity, int newWidth, int newHeight)
+        {
+            entity.position = entity.Center;
+            entity.width = newWidth;
+            entity.height = newHeight;
+            entity.Center = entity.position;
+        }
+
+        /// <summary>
+        /// Resizes an entity to a new size
+        /// </summary>
+        /// <param name="entity">The entity to be resized</param>
+        /// <param name="newSize">The new size</param>
+        public static void Resize(this Entity entity, int newSize)
+        {
+            entity.position = entity.Center;
+            entity.width = newSize;
+            entity.height = newSize;
+            entity.Center = entity.position;
+        }
+
+        /// <summary>
+        /// Spawns dust around an entity
+        /// </summary>
+        /// <param name="entity">The entity to spawn dust on</param>
+        /// <param name="dustType">The dust type</param>
+        /// <param name="velocity">The dust velocity</param>
+        /// <param name="alpha">The alpha of the projectile</param>
+        /// <param name="minSize">The minimum size</param>
+        /// <param name="maxSize">The maximum size</param>
+        /// <returns>The dust whoAmI</returns>
+        public static int SpawnBuffDust(this Entity entity, int dustType, Vector2 velocity, int alpha, float minSize, float maxSize = -1f)
+        {
+            float size = minSize;
+            if (maxSize != -1f)
+                size = Main.rand.NextFloat(minSize, maxSize);
+
+            int dust = Dust.NewDust(entity.position - new Vector2(2f), entity.width + 4, entity.height + 4, dustType, velocity.X, velocity.Y, alpha, Scale: size);
+            Main.dust[dust].noGravity = true;
+            Main.dust[dust].velocity *= 1.8f;
+            Main.dust[dust].velocity.Y -= 0.5f;
+            if (Main.rand.NextBool(4))
+            {
+                Main.dust[dust].noGravity = false;
+                Main.dust[dust].scale *= 0.5f;
+            }
+
+            return dust;
+        }
+
+        /// <summary>
+        /// Spawns dust around an entity
+        /// </summary>
+        /// <param name="entity">The entity to spawn dust on</param>
+        /// <param name="position">The position to spawn the dust on</param>
+        /// <param name="dustType">The dust type</param>
+        /// <param name="velocity">The dust velocity</param>
+        /// <param name="alpha">The alpha of the projectile</param>
+        /// <param name="minSize">The minimum size</param>
+        /// <param name="maxSize">The maximum size</param>
+        /// <returns>The dust whoAmI</returns>
+        public static int SpawnBuffDust(this Entity entity, Vector2 position, int dustType, Vector2 velocity, int alpha, float minSize, float maxSize = -1f)
+        {
+            float size = minSize;
+            if (maxSize != -1f)
+                size = Main.rand.NextFloat(minSize, maxSize);
+
+            int dust = Dust.NewDust(position - new Vector2(2f), entity.width + 4, entity.height + 4, dustType, velocity.X, velocity.Y, alpha, Scale: size);
+            Main.dust[dust].noGravity = true;
+            Main.dust[dust].velocity *= 1.8f;
+            Main.dust[dust].velocity.Y -= 0.5f;
+            if (Main.rand.NextBool(4))
+            {
+                Main.dust[dust].noGravity = false;
+                Main.dust[dust].scale *= 0.5f;
+            }
+
+            return dust;
         }
     }
 }

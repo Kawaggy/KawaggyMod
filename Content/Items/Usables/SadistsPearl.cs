@@ -10,6 +10,18 @@ namespace KawaggyMod.Content.Items.Usables
 {
     public class SadistsPearl : ModItem
     {
+        public override bool Autoload(ref string name)
+        {
+            return false;
+        }
+
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Sadists Pearl");
+            Tooltip.SetDefault("'Looks like someone lost this...'" +
+                "\nLost Relic that brings forth doom");
+        }
+
         public override void SetDefaults()
         {
             item.width = 16;
@@ -32,6 +44,14 @@ namespace KawaggyMod.Content.Items.Usables
             return !NPCHelper.BossAlive();
         }
 
+        public override void AddRecipes()
+        {
+            ModRecipe recipe = new ModRecipe(mod);
+            recipe.AddTile(TileID.DemonAltar);
+            recipe.SetResult(this);
+            recipe.AddRecipe();
+        }
+
         public override bool UseItem(Player player)
         {
             if (!NPCHelper.BossAlive()) //sanity check
@@ -41,7 +61,7 @@ namespace KawaggyMod.Content.Items.Usables
 
                 Main.PlaySound(type: SoundID.Roar, Style: 0);
 
-                string key = SadisticModeWorld.sadisticMode ? "Mods.KawaggyMod.SadisticMode.Enabled" : "Mods.KawaggyMod.SadisticMode.Disabled";
+                string key = SadisticModeWorld.sadisticMode ? "Mods.KawaggyMod.Common.SadisticMode.Enabled" : "Mods.KawaggyMod.Common.SadisticMode.Disabled";
 
                 if (Main.netMode == NetmodeID.SinglePlayer)
                 {

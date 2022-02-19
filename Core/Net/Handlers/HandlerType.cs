@@ -1,6 +1,6 @@
 ﻿namespace KawaggyMod.Core.Net.Handlers
 {
-    public enum HandlerType : byte
+    public enum HandlerType : uint
     {
         KawaggyPlayerHandler,
         SummonPlayerHandler

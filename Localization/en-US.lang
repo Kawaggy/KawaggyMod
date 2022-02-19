@@ -5,50 +5,7 @@ Common.DeveloperFemale=Developer
 Common.CopperBar=Copper Tier Bar
 Common.WorldEvilChunk=World Evil Chunk
 Common.SwapWith=Right click to swap with '{0}'!
+Common.WormTooth=Worm Tooth
 
-SadisticMode.Enabled=Sadistic Mode enabled!
-SadisticMode.Disabled=Sadistic Mode disabled!
-
-#Items
-ItemName.CrackedIceOrb=Cracked Ice Orb
-ItemTooltip.CrackedIceOrb=Summons a magical flying Ice Sword to protect you
-
-ItemName.CloudyCandy=Cloudy Candy
-ItemTooltip.CloudyCandy=Summons a small cute cloud to protect you
-
-ItemName.ChillingShard=Chilling Shard
-ItemTooltip.ChillingShard='Cold to the touch'
-
-ItemName.MahoganyAmulet=Mahogany Amulet
-ItemTooltip.MahoganyAmulet=Increases your max number of minions\nReduces summon damage slightly\nReduces health slightly
-
-ItemName.SniperBullet=Sniper Bullet
-ItemTooltip.SniperBullet=Increases ranged damage slightly
-
-ItemName.SniperBullet_GoldCopper={$Mods.KawaggyMod.ItemName.SniperBullet}
-ItemTooltip.SniperBullet_GoldCopper={$Mods.KawaggyMod.ItemTooltip.SniperBullet}
-
-ItemName.SniperBullet_GoldTin={$Mods.KawaggyMod.ItemName.SniperBullet}
-ItemTooltip.SniperBullet_GoldTin={$Mods.KawaggyMod.ItemTooltip.SniperBullet}
-
-ItemName.SniperBullet_PlatinumCopper={$Mods.KawaggyMod.ItemName.SniperBullet}
-ItemTooltip.SniperBullet_PlatinumCopper={$Mods.KawaggyMod.ItemTooltip.SniperBullet}
-
-ItemName.SniperBullet_PlatinumTin={$Mods.KawaggyMod.ItemName.SniperBullet}
-ItemTooltip.SniperBullet_PlatinumTin={$Mods.KawaggyMod.ItemTooltip.SniperBullet}
-
-ItemName.SadistsPearl=Sadists Pearl
-ItemTooltip.SadistsPearl='Looks like someone lost this...'\nLost Relic that brings forth doom
-
-#Projectiles
-ProjectileName.IceSwords=Ice Sword
-
-ProjectileName.CloudSummon=Cloud
-
-
-#Buffs
-BuffName.IceSwordsBuff=Ice Sword Buff
-BuffDescription.IceSwordsBuff=Magical Ice Swords are here to protect you!
-
-BuffName.CloudSummonBuff=Cloud Summon Buff
-BuffDescription.CloudSummonBuff=Cute Clouds are here to protect you!
+Common.SadisticMode.Enabled=Sadistic Mode enabled!
+Common.SadisticMode.Disabled=Sadistic Mode disabled!

@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace KawaggyMod.Core.Net.Handlers
+namespace KawaggyMod.Core.Net.Handlers.PlayerHandlers
 {
     public class KawaggyPlayerHandler : PacketHandler
     {

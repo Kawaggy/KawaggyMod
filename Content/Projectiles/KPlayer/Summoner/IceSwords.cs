@@ -13,6 +13,9 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
 {
     public class IceSwords : ModProjectile
     {
+        public Vector2 randomOffset;
+        public float rotationAcceleration;
+
         public override void SetStaticDefaults()
         {
             Main.projFrames[projectile.type] = 5; //drawing manually so it shouldn't matter!
@@ -35,6 +38,8 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
             projectile.tileCollide = false;
             projectile.usesLocalNPCImmunity = true;
             projectile.localNPCHitCooldown = 30;
+            randomOffset = Vector2.Zero;
+            rotationAcceleration = 0f;
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
@@ -72,8 +77,7 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
             writer.Write(projectile.localAI[0]);
             writer.Write(projectile.localAI[1]);
 
-            writer.Write(random.X);
-            writer.Write(random.Y);
+            writer.WriteVector2(randomOffset);
         }
 
         public override void ReceiveExtraAI(BinaryReader reader)
@@ -82,9 +86,7 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
             projectile.localAI[0] = reader.ReadSingle();
             projectile.localAI[1] = reader.ReadSingle();
 
-            float X = reader.ReadSingle();
-            float Y = reader.ReadSingle();
-            random = new Vector2(X, Y);
+            randomOffset = reader.ReadVector2();
         }
 
         //ai0 = state
@@ -92,7 +94,6 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
         //localai0 = flag
         //localai1 = random time offset
 
-        private Vector2 random;
         public override void AI()
         {
             Player player = Main.player[projectile.owner];
@@ -263,7 +264,7 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
                         if (projectile.localAI[0] != 2) //random offset and random time
                         {
                             projectile.localAI[0] = 2;
-                            random = new Vector2(0, -240).RotatedBy(MathHelper.TwoPi);
+                            randomOffset = new Vector2(0, -240).RotatedBy(MathHelper.TwoPi);
                             projectile.localAI[1] = Main.rand.Next(-30, 61);
                             projectile.netUpdate = true;
                         }
@@ -280,17 +281,19 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
                                 chargeVelocity *= 16f;
                                 projectile.velocity = chargeVelocity;
                                 projectile.rotation = projectile.velocity.ToRotation() - MathHelper.PiOver2;
-                                random = new Vector2(0, -240).RotatedBy(MathHelper.TwoPi);
+                                randomOffset = new Vector2(0, -240).RotatedBy(MathHelper.TwoPi);
                                 projectile.netUpdate = true;
                             }
                             //move out a little
                             projectile.SmoothRotate((Main.npc[target].Center - projectile.Center).ToRotation() - MathHelper.PiOver2);
-                            Move(Main.npc[target].Center + random + new Vector2(0, projectile.ai[1]).RotatedBy(projectile.rotation));
+                            Move(Main.npc[target].Center + randomOffset + new Vector2(0, projectile.ai[1]).RotatedBy(projectile.rotation));
                         }
                         else if (projectile.ai[1] > 0) //idle around the npc
                         {
-                            projectile.SmoothRotate((Main.npc[target].Center - projectile.Center).ToRotation() - MathHelper.PiOver2);
-                            Move(Main.npc[target].Center + random);
+                            rotationAcceleration += projectile.SmoothRotate((Main.npc[target].Center - projectile.Center).ToRotation() - MathHelper.PiOver2, 0.05f, false);
+                            projectile.rotation += rotationAcceleration;
+                            rotationAcceleration *= 0.80f;
+                            Move(Main.npc[target].Center + randomOffset);
                         }
                     }
                     break;

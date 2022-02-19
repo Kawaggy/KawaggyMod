@@ -1,4 +1,6 @@
 ﻿using KawaggyMod.Core.ModTypes;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -11,6 +13,12 @@ namespace KawaggyMod.Content.Items.Accessories.Ranger
         internal bool copper;
 
         public override string Texture => string.Join(string.Empty, "KawaggyMod/Content/Items/Accessories/Ranger/SniperBullet_", gold ? "Gold" : "Platinum", copper ? "Copper" : "Tin");
+
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Sniper Bullet");
+            Tooltip.SetDefault("Increases ranged damage slightly");
+        }
 
         public SniperBulletBase(bool gold, bool copper) : base()
         {
@@ -50,8 +58,15 @@ namespace KawaggyMod.Content.Items.Accessories.Ranger
             player.rangedDamage += 0.04f;
             base.UpdateAccessory(player, hideVisual);
         }
-    }
 
+        public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
+        {
+            Texture2D texture = ModContent.GetTexture(Texture);
+            spriteBatch.Draw(texture, position + new Vector2(texture.Width, 0), null, Color.White, MathHelper.PiOver4, Vector2.Zero, scale, SpriteEffects.None, 0);
+            return false;
+        }
+    }
+    
     public class SniperBullet_GoldCopper : SniperBulletBase
     {
         public SniperBullet_GoldCopper() : base(true, true) { }

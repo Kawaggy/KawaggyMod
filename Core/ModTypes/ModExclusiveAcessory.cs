@@ -30,12 +30,12 @@ namespace KawaggyMod.Core.ModTypes
         {
 			if (commonName != null)
             {
-				DisplayName.SetDefault(commonName);
+				DisplayName.SetDefault("{$" + commonName + "}");
             }
 
 			if (commonTooltip != null)
             {
-				Tooltip.SetDefault(commonTooltip);
+				Tooltip.SetDefault("{$" + commonTooltip + "}");
             }
         }
 

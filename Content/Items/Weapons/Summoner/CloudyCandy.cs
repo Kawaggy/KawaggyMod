@@ -17,6 +17,9 @@ namespace KawaggyMod.Content.Items.Weapons.Summoner
         {
             ItemID.Sets.GamepadWholeScreenUseRange[item.type] = true;
             ItemID.Sets.LockOnIgnoresCollision[item.type] = true;
+
+            DisplayName.SetDefault("Cloudy Candy");
+            Tooltip.SetDefault("Summons a small cute cloud to protect you");
         }
 
         public override void SetDefaults()
@@ -29,7 +32,7 @@ namespace KawaggyMod.Content.Items.Weapons.Summoner
             item.useTime = 36;
             item.useAnimation = 36;
             item.useStyle = ItemUseStyleID.SwingThrow;
-            item.value = Item.buyPrice(silver: 40);
+            item.value = Item.buyPrice(silver: 8);
             item.rare = ItemRarityID.Blue;
             item.UseSound = SoundID.Item44;
             item.noMelee = true;

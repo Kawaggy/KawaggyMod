@@ -8,6 +8,31 @@ using Terraria;
 
 namespace KawaggyMod.Core
 {
+    //This is better done in a different mod?
+
+    //TODO: REWORK
+    // Add a list of textures that get loaded only once, and for every "frame" have a rectangle and
+    //a string/int for an ID for the given texture. then have a method that returns a
+    //FramedTexture2D with the given texture and the given frame.
+
+    //public List<Texture2D> textureCache;
+    //public Dictionary<int, int> textureInfo;
+    //public FramedTexture2D GetTexture(int frame)
+
+    //since this system works in frames, each texture could have an int for amount of frames. so maybe a dictionary is easier?
+    //public Dictionary<Texture2D, int> cache;
+    //then just a public FramedTexture2D GetTexture(int frame) where the frame is used for the int part of the Dictionary
+
+    //with the settings, one could read the amount of frames for each Texture and have vertical and horizontal.
+    //then, in the dictionary, have the amount of frames inside of the int.
+    //then when one wants a specific frame, one could just count all the frames (maybe a new static int called Frames) to then
+    //use it. then use the int part of the dictionary and have it as the max. (min 1, max int.MaxValue).
+    //it could also now finally use the two rows, so that horizontal is used first and then goes down for each row,
+    //though that might need a new setting for each frame (horizontalFrames and verticalFrames), would get rid of frames and horizontal
+    //settings.
+
+    //this is simply to reduce the amount of ram used by the mod by loading the same texture n times for each frame that uses
+    //the same texture
     public abstract class CustomizationBase
     {
         public CustomizationBase(string customizationObject, int width, int height)
@@ -34,13 +59,15 @@ namespace KawaggyMod.Core
         public List<FramedTexture2D> cache;
 
         /// <summary>
-        /// For custom loading of images. Has SimpleLoad called inside it.
+        /// For custom loading of images. Has SimpleLoad called inside the base.
         /// </summary>
         public virtual void Load()
         {
             SimpleLoad();
         }
 
+
+        //if above rework is done, have to rework the settings and loading as well here
         /// <summary>
         /// Default load system.
         /// </summary>
@@ -194,6 +221,9 @@ namespace KawaggyMod.Core
         {
         }
 
+        /// <summary>
+        /// Already unloads the cache, customization object, data for width and height. At the end, calls AdditionalUnloading
+        /// </summary>
         public void Unload()
         {
             cache.Clear();

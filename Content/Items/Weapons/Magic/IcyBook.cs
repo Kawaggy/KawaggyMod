@@ -1,5 +1,6 @@
 ﻿using KawaggyMod.Content.Items.Miscellaneous;
 using KawaggyMod.Content.Projectiles.KPlayer.Magic;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -7,6 +8,12 @@ namespace KawaggyMod.Content.Items.Weapons.Magic
 {
     public class IcyBook : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Icy Book");
+            //Tooltip.SetDefault("");
+        }
+
         public override void SetDefaults()
         {
             item.width = 22;
@@ -24,6 +31,7 @@ namespace KawaggyMod.Content.Items.Weapons.Magic
             item.UseSound = SoundID.Item43;
             item.autoReuse = true;
             item.rare = ItemRarityID.Orange;
+            item.value = Item.sellPrice(gold: 2, silver: 75);
         }
 
         public override void AddRecipes()

@@ -5,40 +5,7 @@ Common.DeveloperFemale=Entwicklerin
 Common.CopperBar=Kupferstufenbarren
 Common.WorldEvilChunk=Welt böser Brocken
 Common.SwapWith=Rechtsklick zum Tauschen mit '{0}'!
+Common.WormTooth=Wurmzahn
 
-SadisticMode.Enabled=Sadistischer Modus aktiviert!
-SadisticMode.Disabled=Sadistischer Modus deaktiviert!
-
-#Items
-ItemName.CrackedIceOrb=Gebrochene Eiskugel
-ItemTooltip.CrackedIceOrb=Beschwört ein magisches fliegendes Eisschwert um dich zu beschützen
-
-ItemName.CloudyCandy=Bewölktes Süssigkeit
-ItemTooltip.CloudyCandy=Beschwört eine kleine süsse Wolke um dich zu beschützen
-
-ItemName.ChillingShard=Kühle Scherbe
-ItemTooltip.ChillingShard='Kalt, kalt kalt!'
-
-ItemName.MahoganyAmulet=Mahagoni Amulett
-ItemTooltip.MahoganyAmulet=Erhöht deine maximale Anzahl von Beschwörungen\nReduziert Beschwörungsschaden leicht\nReduziert die Gesundheit leicht
-
-ItemName.SniperBullet=Scharfschützenkugel
-ItemTooltip.SniperBullet=Erhöht den Fernkampfschaden leicht
-
-ItemName.SadistsPearl=Sadisten-Perle
-ItemTooltip.SadistsPearl='Sieht so aus, als hätte das jemand verloren...'\nVerlorenes Relikt das den Untergang hervorbringt
-
-
-#Projectiles
-ProjectileName.IceSwords=Eisschwert
-
-ProjectileName.CloudSummon=Wolke
-
-
-#Buffs
-BuffName.IceSwordsBuff=Eisschwerte
-BuffDescription.IceSwordsBuff=Magische Eisschwerter sind hier um dich zu beschützen!
-
-BuffName.CloudSummonBuff=Wolkenbeschwörung
-BuffDescription.CloudSummonBuff=Niedliche Wolken sind hier um dich zu beschützen!
-
+Common.SadisticMode.Enabled=Sadistischer Modus aktiviert!
+Common.SadisticMode.Disabled=Sadistischer Modus deaktiviert!

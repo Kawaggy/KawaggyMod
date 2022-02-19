@@ -7,12 +7,21 @@ namespace KawaggyMod.Content.Items.Accessories.Summoner
 {
     public class MahoganyAmulet : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Mahogany Amulet");
+            Tooltip.SetDefault("Increases your max number of minions" +
+                "\nReduces summon damage slightly" +
+                "\nReduces health slightly");
+        }
+
         public override void SetDefaults()
         {
             item.accessory = true;
             item.width = 30;
             item.height = 30;
             item.rare = ItemRarityID.Blue;
+            item.value = Item.sellPrice(silver: 28);
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
@@ -28,7 +37,7 @@ namespace KawaggyMod.Content.Items.Accessories.Summoner
             recipe.AddIngredient(ItemID.RichMahogany, 15);
             recipe.AddIngredient(ItemID.Rope, 2);
             recipe.AddIngredient(ItemID.FallenStar, 5);
-            recipe.AddRecipeGroup(RecipeManager.WorldEvilChunk, 5);
+            recipe.AddRecipeGroup(RecipeManager.AnyWorldEvilChunk, 5);
             recipe.AddTile(TileID.DemonAltar);
             recipe.SetResult(this);
             recipe.AddRecipe();

@@ -11,6 +11,11 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Ranger
     {
         public override string Texture => "KawaggyMod/Content/Items/Miscellaneous/ChillingShard";
 
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Chilling Shard");
+        }
+
         public override void SetDefaults()
         {
             projectile.width = 12;

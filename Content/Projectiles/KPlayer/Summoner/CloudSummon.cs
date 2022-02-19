@@ -22,6 +22,8 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
             ProjectileID.Sets.MinionTargettingFeature[projectile.type] = true;
             ProjectileID.Sets.MinionSacrificable[projectile.type] = true;
             ProjectileID.Sets.Homing[projectile.type] = true;
+
+            DisplayName.SetDefault("Cloud");
         }
 
         public override void SetDefaults()

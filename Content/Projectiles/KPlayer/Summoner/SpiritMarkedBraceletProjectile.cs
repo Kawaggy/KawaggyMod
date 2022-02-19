@@ -14,6 +14,8 @@ namespace KawaggyMod.Content.Projectiles.KPlayer.Summoner
         {
             Main.projFrames[projectile.type] = 5;
             ProjectileID.Sets.MinionShot[projectile.type] = true;
+
+            DisplayName.SetDefault("Spirit");
         }
 
         public override void SetDefaults()

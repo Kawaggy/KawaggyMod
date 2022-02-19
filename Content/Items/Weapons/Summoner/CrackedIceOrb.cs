@@ -17,6 +17,9 @@ namespace KawaggyMod.Content.Items.Weapons.Summoner
         {
             ItemID.Sets.GamepadWholeScreenUseRange[item.type] = true;
             ItemID.Sets.LockOnIgnoresCollision[item.type] = true;
+
+            DisplayName.SetDefault("Cracked Ice Orb");
+            Tooltip.SetDefault("Summons a magical flying Ice Sword to protect you");
         }
 
         public override void SetDefaults()

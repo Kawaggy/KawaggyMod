@@ -10,11 +10,13 @@ namespace KawaggyMod.Common.ModPlayers
         public int currentCloudJump;
 
         public bool spiritMarkedBracelet;
+        public int maxMiniMinions;
         public override void Initialize()
         {
             jumpAgainCloudCounter = 0;
             currentCloudJump = -1;
             spiritMarkedBracelet = false;
+            maxMiniMinions = 3;
         }
 
         public override void ResetEffects()
@@ -28,6 +30,12 @@ namespace KawaggyMod.Common.ModPlayers
             }
 
             spiritMarkedBracelet = false;
+            maxMiniMinions = 3;
+        }
+
+        public override void PostUpdateEquips()
+        {
+            maxMiniMinions += player.maxMinions * 2;
         }
 
         public override void clientClone(ModPlayer clientClone)

@@ -11,6 +11,9 @@ namespace KawaggyMod.Content.Buffs.Summoner
         {
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
+
+            DisplayName.SetDefault("Ice Sword Buff");
+            Description.SetDefault("Magical Ice Swords are here to protect you!");
         }
 
         public override void Update(Player player, ref int buffIndex)

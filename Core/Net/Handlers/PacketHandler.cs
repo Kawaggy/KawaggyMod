@@ -1,6 +1,4 @@
 ﻿using System.IO;
-using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace KawaggyMod.Core.Net.Handlers
@@ -19,7 +17,7 @@ namespace KawaggyMod.Core.Net.Handlers
         protected ModPacket GetPacket(byte messageType)
         {
             var packet = KawaggyMod.Instance.GetPacket();
-            packet.Write((byte)Type);
+            packet.Write((uint)Type);
             packet.Write(messageType);
 
             return packet;
