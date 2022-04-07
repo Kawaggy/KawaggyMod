@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using KawaggyMod.Core.Helpers;
+using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.ModLoader;
@@ -8,14 +9,25 @@ namespace KawaggyMod.Common.ModPlayers
     //Add different ways to make the camera move, like one that always follows the desired position instead of sticking to it
     public class CameraPlayer : ModPlayer
     {
+        public class Mode
+        {
+            public const int noMode = -1;
+            public const int linear = 0;
+            public const int easeInOut = 1;
+        }
+
+        public delegate void CameraMethod(Player player);
+
         public Vector2 screenShakeStrengthX;
         public Vector2 screenShakeStrengthY;
         public int maxScreenMoveTime;
+        public int mode;
         /// <summary>
-        /// Keep in mind that 60 ticks are reserved for going towards and back.
+        /// Keep in mind that 60 ticks are added.
         /// </summary>
         public int screenMoveTimer;
         public Vector2 desiredScreenPosition;
+        public CameraMethod customCamera;
 
         public override void PostUpdate()
         {
@@ -26,6 +38,8 @@ namespace KawaggyMod.Common.ModPlayers
                     screenMoveTimer = 0;
                     maxScreenMoveTime = 0;
                     desiredScreenPosition = Vector2.Zero;
+                    mode = Mode.noMode;
+                    customCamera = null;
                 }
 
                 if (screenMoveTimer < maxScreenMoveTime)
@@ -33,20 +47,27 @@ namespace KawaggyMod.Common.ModPlayers
             }
         }
 
-        public void SetCamera(Vector2 position, int time)
+        public void NewCamera(Vector2 position, int time, int mode, CameraMethod customBehaviour = null)
         {
-            SetCameraPosition(position);
-            SetCameraTime(time);
+            SetPosition(position);
+            SetMode(mode);
+            SetTime(time);
+            customCamera = customBehaviour;
         }
 
-        public void SetCameraTime(int time)
-        {
-            maxScreenMoveTime = time + (30 * 2);
-        }
-
-        public void SetCameraPosition(Vector2 position)
+        public void SetPosition(Vector2 position)
         {
             desiredScreenPosition = position;
+        }
+
+        public void SetMode(int mode)
+        {
+            this.mode = mode;
+        }
+
+        public void SetTime(int time)
+        {
+            maxScreenMoveTime = time + (30 * 2);
         }
 
         public void SetScreenShakeStrength(Vector2 XStrength, Vector2 YStrength)
@@ -105,24 +126,55 @@ namespace KawaggyMod.Common.ModPlayers
             if (Main.myPlayer != player.whoAmI)
                 return;
 
+            if (desiredScreenPosition == Vector2.Zero)
+            {
+                NewCamera(Main.MouseWorld, 4 * 60, Mode.easeInOut);
+            }
+
             if (maxScreenMoveTime > 0 && desiredScreenPosition != Vector2.Zero)
             {
                 Vector2 offset = new Vector2(Main.screenWidth, Main.screenHeight) / -2f;
 
-                if (screenMoveTimer < 30)
+                switch (mode)
                 {
-                    Main.screenPosition = Vector2.SmoothStep(Main.LocalPlayer.Center + offset, desiredScreenPosition + offset, screenMoveTimer / 30f);
-                }
-                else if (screenMoveTimer > maxScreenMoveTime - 30)
-                {
-                    Main.screenPosition = Vector2.SmoothStep(desiredScreenPosition + offset, Main.LocalPlayer.Center + offset, (screenMoveTimer - (maxScreenMoveTime - 30)) / 30f);
-                }
-                else
-                {
-                    Main.screenPosition = desiredScreenPosition + offset;
+                    case Mode.linear:
+                        if (screenMoveTimer < 30)
+                        {
+                            Main.screenPosition = Vector2.SmoothStep(Main.LocalPlayer.Center + offset, desiredScreenPosition + offset, screenMoveTimer / 30f);
+                        }
+                        else if (screenMoveTimer > maxScreenMoveTime - 30)
+                        {
+                            Main.screenPosition = Vector2.SmoothStep(desiredScreenPosition + offset, Main.LocalPlayer.Center + offset, (screenMoveTimer - (maxScreenMoveTime - 30)) / 30f);
+                        }
+                        else
+                        {
+                            Main.screenPosition = desiredScreenPosition + offset;
+                        }
+                        break;
+
+                    case Mode.easeInOut:
+                        if (screenMoveTimer < maxScreenMoveTime / 2f)
+                        {
+                            Main.screenPosition = Vector2.Lerp(Main.LocalPlayer.Center + offset, desiredScreenPosition + offset, KawaggyHelper.EaseInOut(screenMoveTimer / ((maxScreenMoveTime - 60) / 2f)));
+                        }
+                        else if(screenMoveTimer < (maxScreenMoveTime / 2f) + 60)
+                        {
+                            Main.screenPosition = desiredScreenPosition + offset;
+                        }
+                        else if (screenMoveTimer >= (maxScreenMoveTime / 2f) + 60)
+                        {
+                            Main.screenPosition = Vector2.Lerp(desiredScreenPosition + offset, Main.LocalPlayer.Center + offset, KawaggyHelper.EaseInOut((screenMoveTimer - ((maxScreenMoveTime - 60) / 2f)) / (maxScreenMoveTime / 2f)));
+                        }
+                        break;
+
+                    case Mode.noMode:
+
+                        customCamera?.Invoke(player);
+
+                        break;
                 }
             }
-            
+
             Main.screenPosition.X += (int)Main.rand.NextFloat(screenShakeStrengthX.X, screenShakeStrengthX.Y);
             Main.screenPosition.Y += (int)Main.rand.NextFloat(screenShakeStrengthY.X, screenShakeStrengthY.Y);
 

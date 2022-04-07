@@ -1,6 +1,8 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Graphics.Shaders;
+using Terraria.ID;
 using Terraria.Localization;
 
 namespace KawaggyMod.Core.Helpers
@@ -23,6 +25,23 @@ namespace KawaggyMod.Core.Helpers
 
             GameShaders.Misc[name] = new MiscShaderData(effect, pass);
             GameShaders.Armor.BindShader(item, new ArmorShaderData(effect, pass));
+        }
+
+        public static void NewText(string text, Color color)
+        {
+            if (Main.netMode == NetmodeID.SinglePlayer)
+            {
+                Main.NewText(newText: Language.GetTextValue(text), color: color);
+            }
+            else if (Main.netMode == NetmodeID.Server)
+            {
+                NetMessage.BroadcastChatMessage(text: NetworkText.FromKey(text), color: color);
+            }
+        }
+
+        public static void NewText(string text)
+        {
+            NewText(text, Color.White);
         }
     }
 }

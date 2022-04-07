@@ -25,8 +25,8 @@ namespace KawaggyMod.Content.Items.Armors.Antlion
 
         public override void UpdateEquip(Player player)
         {
-            player.magicDamage += 0.08f;
-            player.minionDamage += 0.08f;
+            player.magicDamage += 0.04f;
+            player.minionDamage += 0.04f;
         }
 
         public override void AddRecipes()

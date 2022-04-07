@@ -63,15 +63,8 @@ namespace KawaggyMod.Content.Items.Usables
 
                 string key = SadisticModeWorld.sadisticMode ? "Mods.KawaggyMod.Common.SadisticMode.Enabled" : "Mods.KawaggyMod.Common.SadisticMode.Disabled";
 
-                if (Main.netMode == NetmodeID.SinglePlayer)
-                {
-                    Main.NewText(newText: Language.GetTextValue(key), color: Color.Red);
-                }
-                else if (Main.netMode == NetmodeID.Server)
-                {
-                    NetMessage.BroadcastChatMessage(text: NetworkText.FromKey(key), color: Color.Red);
-                    NetMessage.SendData(msgType: MessageID.WorldData);
-                }
+                KawaggyHelper.NewText(text: key, color: Color.Red);
+                WorldHelper.SendWorldData();
             }
             return true;
         }

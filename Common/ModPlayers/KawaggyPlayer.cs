@@ -1,5 +1,7 @@
-﻿using KawaggyMod.Core.Net;
+﻿using KawaggyMod.Common.Events;
+using KawaggyMod.Core.Net;
 using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace KawaggyMod.Common.ModPlayers
@@ -44,6 +46,11 @@ namespace KawaggyMod.Common.ModPlayers
             {
                 NetHandler.PlayerHandlers.playerHandler.SendOldJumpAndRotation(-1, -1, player.whoAmI);
             }
+        }
+
+        public override void OnEnterWorld(Player player)
+        {
+            MassiveSandstorm.WorldClear();
         }
     }
 }

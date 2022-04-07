@@ -25,8 +25,8 @@ namespace KawaggyMod.Content.Items.Armors.Antlion
 
         public override void UpdateEquip(Player player)
         {
-            player.magicDamage += 0.04f;
-            player.minionDamage += 0.04f;
+            player.magicDamage += 0.02f;
+            player.minionDamage += 0.02f;
         }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)

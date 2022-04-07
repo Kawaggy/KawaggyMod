@@ -28,11 +28,13 @@ namespace KawaggyMod
 
             Editing.ILEdits();
             Editing.OnEdits();
+            ReflectionCache.Load();
         }
 
         public override void PostSetupContent()
         {
             ModCompatibilityManager.Load();
+            ReflectionCache.PostSetupContentLoad();
         }
 
         public override void AddRecipeGroups()
@@ -58,6 +60,8 @@ namespace KawaggyMod
             }
             ModCompatibilityManager.Unload();
             PlayerEvents.Unload();
+            Editing.Unload();
+            ReflectionCache.Unload();
             SavePath = null;
             Instance = null;
         }
